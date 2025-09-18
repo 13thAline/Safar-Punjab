@@ -87,3 +87,32 @@ async def get_driver_status(driver_id: str):
     if driver:
         return driver
     raise HTTPException(status_code=404, detail="Driver not found")
+class StatusUpdate(BaseModel):
+    new_status: str # Should be 'VERIFIED' or 'REJECTED'
+
+@app.get("/admin/pending-drivers", response_model=List[Driver])
+async def get_pending_drivers():
+    """
+    Returns a list of all drivers with a 'PENDING_REVIEW' status.
+    """
+    pending_drivers = await driver_collection.find({"verification_status": "PENDING_REVIEW"}).to_list(length=100)
+    return pending_drivers
+
+@app.post("/admin/update-status/{driver_id}")
+async def update_driver_status(driver_id: str, status_update: StatusUpdate):
+    """
+    Allows an admin to update a driver's verification status.
+    """
+    new_status = status_update.new_status
+    if new_status not in ["VERIFIED", "REJECTED"]:
+        raise HTTPException(status_code=400, detail="Invalid status. Must be 'VERIFIED' or 'REJECTED'.")
+
+    update_result = await driver_collection.find_one_and_update(
+        {"driver_id": driver_id},
+        {"$set": {"verification_status": new_status}}
+    )
+
+    if update_result is None:
+        raise HTTPException(status_code=404, detail=f"Driver '{driver_id}' not found.")
+
+    return {"driver_id": driver_id, "new_status": new_status}
