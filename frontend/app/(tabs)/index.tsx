@@ -145,7 +145,7 @@ export default function Index() {
       style={{
         borderWidth: 0,
         flex: 1,
-        width: 298,
+        width: "95%",
         borderRadius: 30
       }}
       dropDownContainerStyle={{
@@ -198,7 +198,7 @@ export default function Index() {
       style={{
         borderWidth: 0,
         flex: 1,
-        width: 298,
+        width: "95%",
         borderRadius: 30
       }}
       dropDownContainerStyle={{
