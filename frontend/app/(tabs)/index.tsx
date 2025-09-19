@@ -76,6 +76,7 @@ export default function Index() {
           shadowRadius: 6,
           shadowOffset: { width: 0, height: 2 },
           alignSelf: "center",
+          elevation: 15
         }}
       >
         <Text
