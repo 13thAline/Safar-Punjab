@@ -12,6 +12,7 @@ export default function Index() {
   const logoLeftCentered = SCREEN_WIDTH / 2 - LOGO_SIZE / 2;
   const CARD_WIDTH = SCREEN_WIDTH * 0.9;
   const BIG_BOX_WIDTH = SCREEN_WIDTH * 0.92;
+  const BIG_IMAGE_WIDTH = BIG_BOX_WIDTH * 0.9;
 
   // Dropdown States
   const [fromOpen, setFromOpen] = useState(false);
@@ -22,6 +23,10 @@ export default function Index() {
 
   const handleSearch = () => {
     console.log("Searching buses from", fromStation, "to", toStation);
+  };
+
+  const handleRegisters = () => {
+    console.log("Register");
   };
 
   const handleBusNoPress = () => {
@@ -275,7 +280,9 @@ export default function Index() {
         </View>
       </View>
 
-      <View  style={{
+      {/* Second Box */}
+      <View
+        style={{
           width: BIG_BOX_WIDTH,
           minHeight: 486,
           backgroundColor: "#DFE5C6",
@@ -284,13 +291,96 @@ export default function Index() {
           paddingHorizontal: 20,
           paddingTop: 18,
           alignSelf: "center",
-        }}>
+        }}
+      >
+        <Image
+          source={require("../../assets/images/43f6c055c931d7ebf52ec5b1240d8256113447f7 (1).png")}
+          style={{
+            top: 3,
+            width: BIG_IMAGE_WIDTH,
+            height: 200,
+            borderRadius: 20,
+            alignSelf: "center",
+          }}
+        />
 
+        <Text
+          style={{
+            fontFamily: "Montserrat",
+            fontWeight: "700",
+            fontSize: 28,
+            color: "#045633",
+            top: 12,
+          }}
+        >
+          Got an Empty Seat?
+        </Text>
+
+        <Text
+          style={{
+            fontFamily: "Montserrat",
+            fontWeight: "600",
+            fontSize: 21,
+            color: "#D7263D",
+            top: 22,
+          }}
+        >
+          Get verified today!
+        </Text>
+
+        <Text
+          style={{
+            fontFamily: "Montserrat",
+            fontWeight: "600",
+            fontSize: 18,
+            color: "#500B14",
+            top: 35,
+          }}
+        >
+          Already on the road? Our platform connects you with customers heading
+          in your direction to fill empty seats and boost your earnings.
+        </Text>
+
+        {/* REGISTER BUTTON (Right aligned with fixed height) */}
+        <View style={{ alignItems: "flex-end", marginTop: 50 }}>
+          <TouchableOpacity
+            onPress={handleRegisters}
+            style={{
+              backgroundColor: "#045633",
+              paddingVertical: 12,
+              width: LOGO_SIZE + 90,
+              height: 50,
+              borderRadius: 35,
+              alignItems: "center",
+              justifyContent: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.15,
+              shadowRadius: 5,
+              elevation: 3,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "Montserrat",
+                fontWeight: "700",
+                fontSize: 18,
+                color: "#FFFFFF",
+              }}
+            >
+              Register
+            </Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 
   return (
-    <FlatList data={[{ key: "main" }]} renderItem={renderContent} keyExtractor={(item) => item.key} />
+    <FlatList
+      data={[{ key: "main" }]}
+      renderItem={renderContent}
+      keyExtractor={(item) => item.key}
+    />
   );
 }
