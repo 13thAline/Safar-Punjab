@@ -1,10 +1,11 @@
-// app/(tabs)/_layout.tsx
-import { Tabs } from "expo-router";
+// app/_layout.tsx
+import { Stack } from "expo-router";
 
-export default function TabLayout() {
+export default function RootLayout() {
   return (
-    <Tabs>
-      <Tabs.Screen name="index" options={{ title: "Home" }} />
-    </Tabs>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
+      {/* Add other screens here later if needed */}
+    </Stack>
   );
 }
