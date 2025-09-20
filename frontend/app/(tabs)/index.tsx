@@ -25,7 +25,9 @@ export default function Index() {
   const [toStation, setToStation] = useState(null);
 
   const handleSearch = () => {
-    console.log("Searching buses from", fromStation, "to", toStation);
+     router.push(
+    `/search?from=${encodeURIComponent(fromStation || "")}&to=${encodeURIComponent(toStation || "")}`
+  );
   };
 
   const handleRegisters = () => {
@@ -146,6 +148,7 @@ export default function Index() {
       setOpen={setFromOpen}
       setValue={setFromStation}
       placeholder="Select To Station"
+      listMode="MODAL"
       style={{
         borderWidth: 0,
         flex: 1,
@@ -199,6 +202,7 @@ export default function Index() {
       setOpen={setToOpen}
       setValue={setToStation}
       placeholder="Select To Station"
+      listMode="MODAL"
       style={{
         borderWidth: 0,
         flex: 1,
