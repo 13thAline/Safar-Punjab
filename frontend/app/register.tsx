@@ -1,8 +1,6 @@
 import { Text,View, Image, Dimensions, TextInput,ScrollView,TouchableOpacity } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
-import * as DocumentPicker from "expo-document-picker";
-import CheckBox from 'expo-checkbox';
 
 export default function RegisterHeader() {
   const SCREEN_WIDTH = Dimensions.get("window").width;
