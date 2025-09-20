@@ -2,10 +2,13 @@ import { View, Image, Dimensions, Text, FlatList, TouchableOpacity } from "react
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 import { stations } from "@/data/station";
+import { useRouter } from "expo-router";
+
 
 export default function Index() {
   const SCREEN_WIDTH = Dimensions.get("window").width;
 
+  const router = useRouter();
   const LOGO_SIZE = 82;
   const LOGO_RADIUS = LOGO_SIZE / 2;
 
@@ -22,11 +25,13 @@ export default function Index() {
   const [toStation, setToStation] = useState(null);
 
   const handleSearch = () => {
-    console.log("Searching buses from", fromStation, "to", toStation);
+     router.push(
+    `/search?from=${encodeURIComponent(fromStation || "")}&to=${encodeURIComponent(toStation || "")}`
+  );
   };
 
   const handleRegisters = () => {
-    console.log("Register");
+     router.push("/register");
   };
 
   const handleBusNoPress = () => {
@@ -143,6 +148,7 @@ export default function Index() {
       setOpen={setFromOpen}
       setValue={setFromStation}
       placeholder="Select To Station"
+      listMode="MODAL"
       style={{
         borderWidth: 0,
         flex: 1,
@@ -196,6 +202,7 @@ export default function Index() {
       setOpen={setToOpen}
       setValue={setToStation}
       placeholder="Select To Station"
+      listMode="MODAL"
       style={{
         borderWidth: 0,
         flex: 1,
