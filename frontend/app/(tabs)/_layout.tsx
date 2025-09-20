@@ -1,11 +1,6 @@
 // app/_layout.tsx
-import { Stack } from "expo-router";
+import DriverVerificationScreen from '../driver-verification';
 
-export default function RootLayout() {
-  return (
-    <Stack screenOptions={{ headerShown: false }}>
-      <Stack.Screen name="index" />
-      {/* Add other screens here later if needed */}
-    </Stack>
-  );
+export default function Index() {
+  return <DriverVerificationScreen />;
 }

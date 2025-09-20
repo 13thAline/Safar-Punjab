@@ -34,7 +34,7 @@ export default function DriverVerificationScreen() {
 
     formData.append('files', {
       uri: idPhoto.uri,
-      name: 'id.jpeg',
+      name: 'id.jpg',
       type: 'image/jpeg',
     } as any);
     formData.append('files', {
@@ -61,7 +61,6 @@ export default function DriverVerificationScreen() {
 
       if (response.ok) {
         Alert.alert('Success', 'Documents uploaded successfully. We will review them shortly.');
-        // Here you would navigate the user away or disable the form
       } else {
         Alert.alert('Upload Failed', result.detail || 'An error occurred.');
       }
