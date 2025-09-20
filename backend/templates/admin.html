@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Verification</title>
+    <style>
+        body { font-family: sans-serif; }
+        .driver { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
+        .images img { max-width: 300px; max-height: 300px; margin: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Pending Verifications</h1>
+    <div id="driver-list">
+        </div>
+
+    <script>
+        async function approve(driverId) {
+            await fetch(`/admin/update-status/${driverId}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ new_status: 'VERIFIED' })
+            });
+            location.reload();
+        }
+
+        async function reject(driverId) {
+            await fetch(`/admin/update-status/${driverId}`, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({ new_status: 'REJECTED' })
+            });
+            location.reload();
+        }
+
+        window.onload = async () => {
+            const response = await fetch('/admin/pending-drivers');
+            const drivers = await response.json();
+            const list = document.getElementById('driver-list');
+            
+            if (drivers.length === 0) {
+                list.innerHTML = '<p>No drivers are pending review.</p>';
+                return;
+            }
+
+            drivers.forEach(driver => {
+                const driverDiv = document.createElement('div');
+                driverDiv.className = 'driver';
+                
+                let imagesHTML = '';
+                if (driver.verification_documents) {
+                    driver.verification_documents.forEach(doc => {
+                        // Assuming your uploads are served statically
+                        imagesHTML += `<img src="/uploads/${driver.driver_id}/${doc.file_path.split('/').pop()}" alt="${doc.document_type}">`;
+                    });
+                }
+
+                driverDiv.innerHTML = `
+                    <h3>Driver ID: ${driver.driver_id}</h3>
+                    <div class="images">${imagesHTML}</div>
+                    <button onclick="approve('${driver.driver_id}')">Approve</button>
+                    <button onclick="reject('${driver.driver_id}')">Reject</button>
+                `;
+                list.appendChild(driverDiv);
+            });
+        };
+    </script>
+</body>
+</html>

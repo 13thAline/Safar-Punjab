@@ -13,17 +13,22 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgl1 \
     libglib2.0-0 \
     git \
+    tesseract-ocr \
     && rm -rf /var/lib/apt/lists/*
 
 # Copy the requirements file and install Python packages as ROOT
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Now, create a non-root user and set up permissions
+# Create a non-root user and set up permissions
 RUN useradd -ms /bin/bash appuser && chown -R appuser:appuser /app
 
 # Switch to the non-root user
 USER appuser
+
+# --- THIS IS THE FIX ---
+# Add the user's local bin directory to the PATH environment variable
+ENV PATH="/home/appuser/.local/bin:${PATH}"
 
 # Copy the rest of your application's code as the non-root user
 COPY . .
