@@ -11,13 +11,14 @@ export default function Search() {
     const logoLeftCentered = SCREEN_WIDTH / 2 - LOGO_SIZE / 2;
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#FCF5E3", padding: 20 }}>
+    <View style={{ flex: 1, backgroundColor: "#FCF5E3" }}>
      <View
              style={{
                height: 152,
                backgroundColor: "#FFB703",
                borderBottomLeftRadius: 56,
                borderBottomRightRadius: 56,
+               width: SCREEN_WIDTH
              }}
            >
              <Image
