@@ -1,4 +1,4 @@
-import { View, Text, Image, Dimensions, FlatList, TouchableOpacity } from "react-native";
+import { View, Text, Image, Dimensions, FlatList, TouchableOpacity,ScrollView } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 
@@ -22,27 +22,35 @@ export default function Search() {
   ];
 
   const renderBus = ({ item }: { item: { id: string; busNo: string; route: string } }) => (
+    <ScrollView
+    style={{
+      backgroundColor: "#FCF5E3",
+    }}>
     <View
       style={{
         backgroundColor: "#FFFFFF",
-        marginVertical: 8,
+        marginVertical: 9,
         marginHorizontal: 20,
         padding: 16,
-        borderRadius: 20,
+        borderRadius: 30,
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.1,
         shadowRadius: 6,
         elevation: 5,
+        borderWidth: 10,
+        borderColor: "#DFE5C6",
+        
       }}
     >
-      <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 18, color: "#045633" }}>
+      <Text style={{ fontFamily: "Montserrat", fontWeight: "600", fontSize: 18, color: "#757575F0" }}>
         {item.busNo}
       </Text>
-      <Text style={{ fontFamily: "Montserrat", fontWeight: "500", fontSize: 16, color: "#12201A", marginTop: 4 }}>
+      <Text style={{ fontFamily: "Montserrat", fontWeight: "500", fontSize: 16, color: "#045633", marginTop: 4 }}>
         {item.route}
       </Text>
     </View>
+    </ScrollView>
   );
 
   const swapStations = () => {
@@ -57,6 +65,10 @@ export default function Search() {
       renderItem={renderBus}
       ListHeaderComponent={
         <>
+        <ScrollView
+        style={{
+          backgroundColor: "#FCF5E3"
+        }}>
           {/* Header */}
           <View
             style={{
@@ -109,9 +121,11 @@ export default function Search() {
               marginTop: 40,
               marginHorizontal: 20,
               padding: 16,
-              backgroundColor: "#DFE5C6",
+              backgroundColor: "#FCF5E3",
               borderRadius: 20,
               flexDirection: "row",
+              borderWidth: 3,
+              borderColor: "#FFB703",
               justifyContent: "space-between",
               alignItems: "center",
             }}
@@ -130,7 +144,7 @@ export default function Search() {
               style={{
                 backgroundColor: "#045633",
                 padding: 10,
-                borderRadius: 35,
+                borderRadius: 25,
               }}
             >
               <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 16, color: "#FFF" }}>Swap</Text>
@@ -142,14 +156,15 @@ export default function Search() {
               fontFamily: "Montserrat",
               fontWeight: "700",
               fontSize: 24,
-              color: "#12201A",
+              color: "#500B14",
               marginTop: 30,
-              marginLeft: 20,
+              marginLeft: 20
             }}
           >
             Available Buses
           </Text>
-        </>
+          </ScrollView>
+        </>  
       }
     />
   );
