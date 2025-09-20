@@ -50,7 +50,6 @@
                 let imagesHTML = '';
                 if (driver.verification_documents) {
                     driver.verification_documents.forEach(doc => {
-                        // Assuming your uploads are served statically
                         imagesHTML += `<img src="/uploads/${driver.driver_id}/${doc.file_path.split('/').pop()}" alt="${doc.document_type}">`;
                     });
                 }

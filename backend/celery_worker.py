@@ -1,13 +1,11 @@
-# backend/celery_worker.py
 import os
 import face_recognition
 import pytesseract
 from PIL import Image
 from celery import Celery
-from pymongo import MongoClient # <-- CHANGE: Use MongoClient
+from pymongo import MongoClient 
 from pydantic_settings import BaseSettings
 
-# --- Configuration ---
 class Settings(BaseSettings):
     MONGO_URI: str
     DATABASE_NAME: str
@@ -16,11 +14,9 @@ class Settings(BaseSettings):
         env_file = ".env"
 
 settings = Settings()
-# --- CHANGE: Connect to the 'redis' container ---
 celery_app = Celery("tasks", broker="redis://redis:6379/0", backend="redis://redis:6379/0")
 
 
-# --- AI Helper Functions (Local Processing) ---
 def compare_faces_local(id_image_path, selfie_image_path):
     try:
         id_image = face_recognition.load_image_file(id_image_path)
@@ -44,15 +40,12 @@ def extract_text_from_image(image_path):
         print(f"Error with Tesseract OCR: {e}")
     return ""
 
-# --- Celery Task Definition ---
 @celery_app.task
 def process_verification(driver_id: str):
-    # --- CHANGE: Use a synchronous client for the synchronous worker ---
     client = MongoClient(settings.MONGO_URI)
     db = client[settings.DATABASE_NAME]
     driver_collection = db["drivers"]
     
-    # --- CHANGE: No 'await' needed for synchronous calls ---
     driver = driver_collection.find_one({"driver_id": driver_id})
     if not driver or not driver.get("verification_documents"):
         client.close()
@@ -69,10 +62,10 @@ def process_verification(driver_id: str):
         print(f"Extracted License Text:\n---\n{license_text[:200]}...\n---")
 
         final_status = "NEEDS_REVIEW"
-        if similarity > 85.0: # Using a more lenient threshold for local models
+        if similarity > 85.0: 
             final_status = "VERIFIED"
         
-        # --- CHANGE: No 'await' needed for synchronous calls ---
+
         driver_collection.update_one(
             {"driver_id": driver_id},
             {"$set": {"verification_status": final_status}}

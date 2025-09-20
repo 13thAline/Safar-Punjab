@@ -61,7 +61,6 @@ export default function DriverVerificationScreen() {
 
       if (response.ok) {
         Alert.alert('Success', 'Documents uploaded successfully. We will review them shortly.');
-        // Here you would navigate the user away or disable the form
       } else {
         Alert.alert('Upload Failed', result.detail || 'An error occurred.');
       }
