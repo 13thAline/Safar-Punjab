@@ -34,7 +34,7 @@ export default function DriverVerificationScreen() {
 
     formData.append('files', {
       uri: idPhoto.uri,
-      name: 'id.jpeg',
+      name: 'id.jpg',
       type: 'image/jpeg',
     } as any);
     formData.append('files', {
