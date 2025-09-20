@@ -4,31 +4,30 @@
     <meta charset="UTF-8">
     <title>Admin Verification</title>
     <style>
-        body { font-family: sans-serif; }
-        .driver { border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
-        .images img { max-width: 300px; max-height: 300px; margin: 5px; }
+        body { font-family: sans-serif; max-width: 900px; margin: auto; }
+        .driver { border: 1px solid #ccc; padding: 15px; margin-bottom: 20px; border-radius: 8px; }
+        .images img { width: 100%; max-width: 400px; margin: 5px; border: 1px solid #eee; }
+        .controls { margin-top: 15px; }
     </style>
 </head>
 <body>
     <h1>Pending Verifications</h1>
-    <div id="driver-list">
-        </div>
+    <div id="driver-list"></div>
 
     <script>
-        async function approve(driverId) {
-            await fetch(`/admin/update-status/${driverId}`, {
-                method: 'POST',
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ new_status: 'VERIFIED' })
-            });
-            location.reload();
-        }
+        async function updateStatus(driverId, status) {
+            const busTypeEl = document.querySelector(`input[name='bus-type-${driverId}']:checked`);
+            const busType = busTypeEl ? busTypeEl.value : null;
 
-        async function reject(driverId) {
+            if (status === 'VERIFIED' && !busType) {
+                alert('Please select a bus type (Public or Private) before approving.');
+                return;
+            }
+
             await fetch(`/admin/update-status/${driverId}`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({ new_status: 'REJECTED' })
+                body: JSON.stringify({ new_status: status, bus_type: busType })
             });
             location.reload();
         }
@@ -47,18 +46,30 @@
                 const driverDiv = document.createElement('div');
                 driverDiv.className = 'driver';
                 
+                let rcImage = driver.verification_documents.find(d => d.document_type === 'VEHICLE_RC');
+                let otherImages = driver.verification_documents.filter(d => d.document_type !== 'VEHICLE_RC');
+                
                 let imagesHTML = '';
-                if (driver.verification_documents) {
-                    driver.verification_documents.forEach(doc => {
-                        imagesHTML += `<img src="/uploads/${driver.driver_id}/${doc.file_path.split('/').pop()}" alt="${doc.document_type}">`;
-                    });
+                if (rcImage) {
+                    imagesHTML += `<div><strong>Vehicle RC:</strong><img src="/uploads/${driver.driver_id}/${rcImage.file_path.split(/[\\/]/).pop()}" ></div>`;
                 }
+                otherImages.forEach(doc => {
+                    imagesHTML += `<div><strong>${doc.document_type}:</strong><img src="/uploads/${driver.driver_id}/${doc.file_path.split(/[\\/]/).pop()}"></div>`;
+                });
+                
+                const regNumber = driver.vehicle_info ? driver.vehicle_info.registration_number : 'N/A';
 
                 driverDiv.innerHTML = `
                     <h3>Driver ID: ${driver.driver_id}</h3>
+                    <p><strong>Registration #:</strong> ${regNumber}</p>
                     <div class="images">${imagesHTML}</div>
-                    <button onclick="approve('${driver.driver_id}')">Approve</button>
-                    <button onclick="reject('${driver.driver_id}')">Reject</button>
+                    <div class="controls">
+                        <label><input type="radio" name="bus-type-${driver.driver_id}" value="PUBLIC"> Public</label>
+                        <label><input type="radio" name="bus-type-${driver.driver_id}" value="PRIVATE"> Private</label>
+                        <hr style="margin: 10px 0;">
+                        <button onclick="updateStatus('${driver.driver_id}', 'VERIFIED')">Approve</button>
+                        <button onclick="updateStatus('${driver.driver_id}', 'REJECTED')">Reject</button>
+                    </div>
                 `;
                 list.appendChild(driverDiv);
             });

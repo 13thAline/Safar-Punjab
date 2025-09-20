@@ -11,9 +11,12 @@ from fastapi.templating import Jinja2Templates
 from motor.motor_asyncio import AsyncIOMotorClient
 from pydantic import BaseModel, Field
 from pydantic_settings import BaseSettings
+from fastapi import Form
 
 # --- NEW: Import Celery ---
 from celery import Celery
+from typing import List, Optional, Literal
+from pydantic import BaseModel, Field
 
 # --- Configuration ---
 class Settings(BaseSettings):
@@ -42,14 +45,22 @@ class VerificationDocument(BaseModel):
     file_path: str
     uploaded_at: datetime = Field(default_factory=datetime.utcnow)
 
+class VehicleInfo(BaseModel):
+    registration_number: str
+    bus_type: Optional[Literal['PUBLIC', 'PRIVATE']] = None # Admin will set this
+    operator_name: Optional[str] = None # Admin can add this
+
 class Driver(BaseModel):
     driver_id: str
     username: str
     verification_status: str = "NOT_VERIFIED"
+    rejection_reason: Optional[str] = None
+    vehicle_info: Optional[VehicleInfo] = None # Add this
     verification_documents: Optional[List[VerificationDocument]] = []
 
 class StatusUpdate(BaseModel):
     new_status: str
+    bus_type: Optional[Literal['PUBLIC', 'PRIVATE']] = None # Add this
 
 # --- FastAPI App ---
 app = FastAPI()
@@ -72,27 +83,31 @@ async def shutdown_db_client():
 
 # This endpoint is what your frontend calls
 @app.post("/drivers/upload-verification")
-async def upload_verification_documents(files: List[UploadFile] = File(...)):
-    if len(files) != 3:
-        raise HTTPException(status_code=400, detail="Please upload exactly 3 files.")
+async def upload_verification_documents(
+    registration_number: str = Form(...),
+    files: List[UploadFile] = File(...)
+):
+    if len(files) != 4:
+        raise HTTPException(status_code=400, detail="Please upload exactly 4 files.")
     
-    driver_id = "driver123" 
+    driver_id = "driver123" # Placeholder
 
     driver = await driver_collection.find_one({"driver_id": driver_id})
     if not driver:
         await driver_collection.insert_one({
             "driver_id": driver_id, "username": "some_driver", 
-            "verification_status": "NOT_VERIFIED", "verification_documents": []
+            "verification_status": "NOT_VERIFIED",
         })
 
     driver_upload_path = os.path.join(UPLOAD_DIRECTORY, driver_id)
     os.makedirs(driver_upload_path, exist_ok=True)
 
     document_payloads = []
-    doc_map = {'id': 'GOVERNMENT_ID', 'license': 'LICENSE', 'selfie': 'SELFIE'}
+    # Add 'rc' to the map
+    doc_map = {'id': 'GOVERNMENT_ID', 'license': 'LICENSE', 'selfie': 'SELFIE', 'rc': 'VEHICLE_RC'}
 
     for file in files:
-        file_base_name = os.path.splitext(file.filename)[0]
+        file_base_name = os.path.splitext(file.filename)[0].lower()
         doc_type = doc_map.get(file_base_name, "UNKNOWN")
         file_path = os.path.join(driver_upload_path, file.filename)
         with open(file_path, "wb+") as file_object:
@@ -101,16 +116,21 @@ async def upload_verification_documents(files: List[UploadFile] = File(...)):
         doc_data = VerificationDocument(document_type=doc_type, file_path=file_path)
         document_payloads.append(doc_data.model_dump(mode='json'))
 
+    # Create the vehicle_info object
+    vehicle_info = VehicleInfo(registration_number=registration_number)
+
     await driver_collection.find_one_and_update(
         {"driver_id": driver_id},
-        {"$set": {"verification_status": "PENDING_REVIEW", "verification_documents": document_payloads}}
+        {"$set": {
+            "verification_status": "PENDING_REVIEW",
+            "verification_documents": document_payloads,
+            "vehicle_info": vehicle_info.model_dump(mode='json')
+        }}
     )
     
-    # --- THIS LINE NOW WORKS ---
-    # It sends a message to Redis, which the worker will pick up.
     celery_app.send_task("celery_worker.process_verification", args=[driver_id])
 
-    return {"message": f"Documents for driver '{driver_id}' submitted for processing.", "status": "PENDING_REVIEW"}
+    return {"message": f"Documents for driver '{driver_id}' submitted.", "status": "PENDING_REVIEW"}
 
 
 # ... (The rest of your endpoints: get_driver_status, admin_dashboard, etc. remain the same) ...
@@ -128,21 +148,33 @@ async def admin_dashboard(request: Request):
 
 @app.get("/admin/pending-drivers", response_model=List[Driver])
 async def get_pending_drivers():
-    pending_drivers = []
-    cursor = driver_collection.find({"verification_status": "PENDING_REVIEW"})
-    async for document in cursor:
-        pending_drivers.append(Driver(**document))
+    """
+    Returns a list of all drivers with a 'NEEDS_REVIEW' status.
+    """
+    cursor = driver_collection.find({"verification_status": "NEEDS_REVIEW"})
+    documents = await cursor.to_list(length=100)
+    pending_drivers = [Driver(**doc) for doc in documents]
+
     return pending_drivers
 
 @app.post("/admin/update-status/{driver_id}")
 async def update_driver_status(driver_id: str, status_update: StatusUpdate):
     new_status = status_update.new_status
     if new_status not in ["VERIFIED", "REJECTED"]:
-        raise HTTPException(status_code=400, detail="Invalid status. Must be 'VERIFIED' or 'REJECTED'.")
+        raise HTTPException(status_code=400, detail="Invalid status.")
+    
+    # Create the update payload
+    update_payload = {"$set": {"verification_status": new_status}}
+    
+    # If the admin is verifying, they MUST set a bus type
+    if new_status == "VERIFIED":
+        if not status_update.bus_type:
+            raise HTTPException(status_code=400, detail="Bus type ('PUBLIC' or 'PRIVATE') is required for verification.")
+        update_payload["$set"]["vehicle_info.bus_type"] = status_update.bus_type
 
     update_result = await driver_collection.find_one_and_update(
         {"driver_id": driver_id},
-        {"$set": {"verification_status": new_status}}
+        update_payload
     )
 
     if update_result is None:
