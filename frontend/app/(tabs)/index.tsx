@@ -2,10 +2,13 @@ import { View, Image, Dimensions, Text, FlatList, TouchableOpacity } from "react
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 import { stations } from "@/data/station";
+import { useRouter } from "expo-router";
+
 
 export default function Index() {
   const SCREEN_WIDTH = Dimensions.get("window").width;
 
+  const router = useRouter();
   const LOGO_SIZE = 82;
   const LOGO_RADIUS = LOGO_SIZE / 2;
 
@@ -26,7 +29,7 @@ export default function Index() {
   };
 
   const handleRegisters = () => {
-    console.log("Register");
+     router.push("/register");
   };
 
   const handleBusNoPress = () => {
