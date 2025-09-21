@@ -38,7 +38,7 @@ export default function Footer() {
         alignItems: "center",
         backgroundColor: "#FFF6EA", // light cream background like your screenshot
         paddingVertical: 10,
-        paddingBottom: 15,
+        paddingBottom: 35,
     
         borderColor: "#E0DAD1",
       }}

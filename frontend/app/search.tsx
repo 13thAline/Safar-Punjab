@@ -1,10 +1,11 @@
 import { View, Text, Image, Dimensions, FlatList, TouchableOpacity } from "react-native";
-import { useLocalSearchParams } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import Footer from "@/components/footer";
 
 export default function Search() {
   const { from: initialFrom, to: initialTo } = useLocalSearchParams();
+  const router = useRouter();
 
   const [from, setFrom] = useState(initialFrom || "Not selected");
   const [to, setTo] = useState(initialTo || "Not selected");
@@ -17,12 +18,12 @@ export default function Search() {
 
   // Dummy bus data
   const buses = [
-    { id: "1", busNo: "Bus 101", route: `${from} → ${to}` },
-    { id: "2", busNo: "Bus 202", route: `${from} → ${to}` },
-    { id: "3", busNo: "Bus 303", route: `${from} → ${to}` },
+    { id: "1", busNo: "Bus 101", route: `${from} → ${to}`, type: "Public", nearestStop: "Main Chowk", ac: true },
+    { id: "2", busNo: "Bus 202", route: `${from} → ${to}`, type: "Private", nearestStop: "Bus Stand", ac: false },
+    { id: "3", busNo: "Bus 303", route: `${from} → ${to}`, type: "Public", nearestStop: "Market Stop", ac: true },
   ];
 
-  const renderBus = ({ item }: { item: { id: string; busNo: string; route: string } }) => (
+  const renderBus = ({ item }: { item: (typeof buses)[0] }) => (
     <View
       style={{
         backgroundColor: "#FFFFFF",
@@ -37,14 +38,55 @@ export default function Search() {
         elevation: 5,
         borderWidth: 10,
         borderColor: "#DFE5C6",
+        position: "relative",
       }}
     >
+      {/* AC / Non-AC badge */}
+      <View
+        style={{
+          position: "absolute",
+          top: 12,
+          right: 12,
+          backgroundColor: item.ac ? "#28A745" : "#D62828",
+          paddingVertical: 4,
+          paddingHorizontal: 10,
+          borderRadius: 20,
+        }}
+      >
+        <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 12, color: "#FFF" }}>
+          {item.ac ? "AC" : "Non-AC"}
+        </Text>
+      </View>
+
+      {/* Bus Info */}
       <Text style={{ fontFamily: "Montserrat", fontWeight: "600", fontSize: 18, color: "#757575F0" }}>
-        {item.busNo}
+        {item.busNo} • {item.type}
       </Text>
+
       <Text style={{ fontFamily: "Montserrat", fontWeight: "500", fontSize: 16, color: "#045633", marginTop: 4 }}>
         {item.route}
       </Text>
+
+      <Text style={{ fontFamily: "Montserrat", fontWeight: "500", fontSize: 14, color: "#500B14", marginTop: 6 }}>
+        Nearest Stop: {item.nearestStop}
+      </Text>
+
+      {/* Track Bus button inside card */}
+      <TouchableOpacity
+        onPress={() => router.push({ pathname: "/track", params: { busNo: item.busNo } })}
+        style={{
+          marginTop: 10,
+          backgroundColor: "#045633",
+          paddingVertical: 8,
+          paddingHorizontal: 16,
+          borderRadius: 20,
+          alignSelf: "flex-end",
+        }}
+      >
+        <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 14, color: "#FFF" }}>
+          🚍 Track Bus
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 
@@ -55,7 +97,6 @@ export default function Search() {
 
   return (
     <View style={{ flex: 1, backgroundColor: "#FCF5E3" }}>
-      {/* Main list area */}
       <FlatList
         data={buses}
         keyExtractor={(item) => item.id}
@@ -85,7 +126,7 @@ export default function Search() {
               />
             </View>
 
-            {/* Card */}
+            {/* Greeting Card */}
             <View
               style={{
                 height: 60,
@@ -108,7 +149,7 @@ export default function Search() {
               </Text>
             </View>
 
-            {/* From → To with Swap */}
+            {/* From → To Card */}
             <View
               style={{
                 marginTop: 40,
@@ -152,6 +193,7 @@ export default function Search() {
               </TouchableOpacity>
             </View>
 
+            {/* Section Title */}
             <Text
               style={{
                 fontFamily: "Montserrat",
