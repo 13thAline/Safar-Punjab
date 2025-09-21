@@ -29,7 +29,11 @@ export default function more({ navigation }: any) {
           backgroundColor: "#F0F6D5",
           borderRadius: 20,
           padding: "5%",
-          elevation: 5
+          elevation: 10,
+          shadowColor: "#000",
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.5,
+          shadowRadius: 3.84
         }}
       >
         {/* Menu Items */}
