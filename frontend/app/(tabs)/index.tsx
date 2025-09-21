@@ -339,6 +339,7 @@ export default function Index() {
           borderRadius: 32,
           paddingHorizontal: 20,
           paddingTop: 18,
+          paddingBottom:20,
           alignSelf: "center",
         }}
       >

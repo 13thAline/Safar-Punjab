@@ -1,6 +1,7 @@
 import { View, Text, Image, Dimensions, FlatList, TouchableOpacity } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
+import Footer from "@/components/footer";
 
 export default function Search() {
   const { from: initialFrom, to: initialTo } = useLocalSearchParams();
@@ -53,109 +54,122 @@ export default function Search() {
   };
 
   return (
-    <FlatList
-      data={buses}
-      keyExtractor={(item) => item.id}
-      renderItem={renderBus}
-      ListHeaderComponent={
-        <>
-          {/* Header */}
-          <View
-            style={{
-              height: 152,
-              backgroundColor: "#FFB703",
-              borderBottomLeftRadius: 56,
-              borderBottomRightRadius: 56,
-              width: SCREEN_WIDTH,
-            }}
-          >
-            <Image
-              source={require("../assets/images/305905a717592dd52a6280845291b56a554a0d49.jpg")}
+    <View style={{ flex: 1, backgroundColor: "#FCF5E3" }}>
+      {/* Main list area */}
+      <FlatList
+        data={buses}
+        keyExtractor={(item) => item.id}
+        renderItem={renderBus}
+        ListHeaderComponent={
+          <>
+            {/* Header */}
+            <View
               style={{
-                width: LOGO_SIZE,
-                height: LOGO_SIZE,
-                position: "absolute",
-                top: 20,
-                left: logoLeftCentered,
-                borderRadius: LOGO_RADIUS,
+                height: 152,
+                backgroundColor: "#FFB703",
+                borderBottomLeftRadius: 56,
+                borderBottomRightRadius: 56,
+                width: SCREEN_WIDTH,
               }}
-            />
-          </View>
+            >
+              <Image
+                source={require("../assets/images/305905a717592dd52a6280845291b56a554a0d49.jpg")}
+                style={{
+                  width: LOGO_SIZE,
+                  height: LOGO_SIZE,
+                  position: "absolute",
+                  top: 20,
+                  left: logoLeftCentered,
+                  borderRadius: LOGO_RADIUS,
+                }}
+              />
+            </View>
 
-          {/* Card */}
-          <View
-            style={{
-              height: 60,
-              width: CARD_WIDTH,
-              marginTop: -30,
-              borderRadius: 40,
-              justifyContent: "center",
-              alignItems: "center",
-              backgroundColor: "#FFFFFF",
-              shadowColor: "#000",
-              shadowOpacity: 0.1,
-              shadowRadius: 6,
-              shadowOffset: { width: 0, height: 2 },
-              alignSelf: "center",
-              elevation: 15,
-            }}
-          >
-            <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 28, color: "#045633" }}>
-              Hi Saathi
-            </Text>
-          </View>
-
-          {/* From → To with Swap */}
-          <View
-            style={{
-              marginTop: 40,
-              marginHorizontal: 20,
-              padding: 16,
-              backgroundColor: "#FCF5E3",
-              borderRadius: 20,
-              flexDirection: "row",
-              borderWidth: 3,
-              borderColor: "#FFB703",
-              justifyContent: "space-between",
-              alignItems: "center",
-            }}
-          >
-            <View>
-              <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 20, color: "#045633" }}>
-                From: {from}
-              </Text>
-              <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 20, color: "#045633", marginTop: 8 }}>
-                To: {to}
+            {/* Card */}
+            <View
+              style={{
+                height: 60,
+                width: CARD_WIDTH,
+                marginTop: -30,
+                borderRadius: 40,
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "#FFFFFF",
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowRadius: 6,
+                shadowOffset: { width: 0, height: 2 },
+                alignSelf: "center",
+                elevation: 15,
+              }}
+            >
+              <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 28, color: "#045633" }}>
+                Hi Saathi
               </Text>
             </View>
 
-            <TouchableOpacity
-              onPress={swapStations}
+            {/* From → To with Swap */}
+            <View
               style={{
-                backgroundColor: "#045633",
-                padding: 10,
-                borderRadius: 25,
+                marginTop: 40,
+                marginHorizontal: 20,
+                padding: 16,
+                backgroundColor: "#FCF5E3",
+                borderRadius: 20,
+                flexDirection: "row",
+                borderWidth: 3,
+                borderColor: "#FFB703",
+                justifyContent: "space-between",
+                alignItems: "center",
               }}
             >
-              <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 16, color: "#FFF" }}>Swap</Text>
-            </TouchableOpacity>
-          </View>
+              <View>
+                <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 20, color: "#045633" }}>
+                  From: {from}
+                </Text>
+                <Text
+                  style={{
+                    fontFamily: "Montserrat",
+                    fontWeight: "700",
+                    fontSize: 20,
+                    color: "#045633",
+                    marginTop: 8,
+                  }}
+                >
+                  To: {to}
+                </Text>
+              </View>
 
-          <Text
-            style={{
-              fontFamily: "Montserrat",
-              fontWeight: "700",
-              fontSize: 24,
-              color: "#500B14",
-              marginTop: 30,
-              marginLeft: 20,
-            }}
-          >
-            Available Buses
-          </Text>
-        </>
-      }
-      style={{ backgroundColor: "#FCF5E3" }}
-    />
+              <TouchableOpacity
+                onPress={swapStations}
+                style={{
+                  backgroundColor: "#045633",
+                  padding: 10,
+                  borderRadius: 25,
+                }}
+              >
+                <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 16, color: "#FFF" }}>Swap</Text>
+              </TouchableOpacity>
+            </View>
+
+            <Text
+              style={{
+                fontFamily: "Montserrat",
+                fontWeight: "700",
+                fontSize: 24,
+                color: "#500B14",
+                marginTop: 30,
+                marginLeft: 20,
+              }}
+            >
+              Available Buses
+            </Text>
+          </>
+        }
+      />
+
+      {/* Footer always visible */}
+      <Footer />
+    </View>
   );
 }
