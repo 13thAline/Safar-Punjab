@@ -1,4 +1,4 @@
-import { View, Text, Image, Dimensions, FlatList, TouchableOpacity,ScrollView } from "react-native";
+import { View, Text, Image, Dimensions, FlatList, TouchableOpacity } from "react-native";
 import { useLocalSearchParams } from "expo-router";
 import { useState } from "react";
 
@@ -22,10 +22,6 @@ export default function Search() {
   ];
 
   const renderBus = ({ item }: { item: { id: string; busNo: string; route: string } }) => (
-    <ScrollView
-    style={{
-      backgroundColor: "#FCF5E3",
-    }}>
     <View
       style={{
         backgroundColor: "#FFFFFF",
@@ -40,7 +36,6 @@ export default function Search() {
         elevation: 5,
         borderWidth: 10,
         borderColor: "#DFE5C6",
-        
       }}
     >
       <Text style={{ fontFamily: "Montserrat", fontWeight: "600", fontSize: 18, color: "#757575F0" }}>
@@ -50,7 +45,6 @@ export default function Search() {
         {item.route}
       </Text>
     </View>
-    </ScrollView>
   );
 
   const swapStations = () => {
@@ -65,10 +59,6 @@ export default function Search() {
       renderItem={renderBus}
       ListHeaderComponent={
         <>
-        <ScrollView
-        style={{
-          backgroundColor: "#FCF5E3"
-        }}>
           {/* Header */}
           <View
             style={{
@@ -158,14 +148,14 @@ export default function Search() {
               fontSize: 24,
               color: "#500B14",
               marginTop: 30,
-              marginLeft: 20
+              marginLeft: 20,
             }}
           >
             Available Buses
           </Text>
-          </ScrollView>
-        </>  
+        </>
       }
+      style={{ backgroundColor: "#FCF5E3" }}
     />
   );
 }
