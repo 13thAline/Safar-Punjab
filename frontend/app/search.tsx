@@ -1,6 +1,7 @@
 import { View, Text, Image, Dimensions, FlatList, TouchableOpacity } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
+import { Ionicons } from "@expo/vector-icons"
 import Footer from "@/components/footer";
 
 export default function Search() {
@@ -59,9 +60,15 @@ export default function Search() {
       </View>
 
       {/* Bus Info */}
-      <Text style={{ fontFamily: "Montserrat", fontWeight: "600", fontSize: 18, color: "#757575F0" }}>
+      {/* <Text style={{ fontFamily: "Montserrat", fontWeight: "600", fontSize: 18, color: "#757575F0" }}>
         {item.busNo} • {item.type}
-      </Text>
+      </Text> */}
+
+        <Text style={{ fontFamily: "Montserrat", fontWeight: "600", fontSize: 18, color: "#757575F0" }}>
+           {item.busNo} •{" "}
+        <Text style={{ color: "#FFB703" }}>{item.type}</Text>
+        </Text>
+
 
       <Text style={{ fontFamily: "Montserrat", fontWeight: "500", fontSize: 16, color: "#045633", marginTop: 4 }}>
         {item.route}
@@ -151,47 +158,55 @@ export default function Search() {
 
             {/* From → To Card */}
             <View
+            style={{
+              marginTop: 40,
+              marginHorizontal: 20,
+              padding: 10,
+              backgroundColor: "#FCF5E3",
+              borderRadius: 20,
+              borderWidth: 3,
+              borderColor: "#FFB703",
+              alignItems: "center", // center everything
+            }}
+          >
+            <Text
               style={{
-                marginTop: 40,
-                marginHorizontal: 20,
-                padding: 16,
-                backgroundColor: "#FCF5E3",
-                borderRadius: 20,
-                flexDirection: "row",
-                borderWidth: 3,
-                borderColor: "#FFB703",
-                justifyContent: "space-between",
-                alignItems: "center",
+                fontFamily: "Montserrat",
+                fontWeight: "700",
+                fontSize: 20,
+                color: "#045633",
+                marginBottom: 4,
               }}
             >
-              <View>
-                <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 20, color: "#045633" }}>
-                  From: {from}
-                </Text>
-                <Text
-                  style={{
-                    fontFamily: "Montserrat",
-                    fontWeight: "700",
-                    fontSize: 20,
-                    color: "#045633",
-                    marginTop: 8,
-                  }}
-                >
-                  To: {to}
-                </Text>
-              </View>
+              From: {from}
+            </Text>
 
-              <TouchableOpacity
-                onPress={swapStations}
-                style={{
-                  backgroundColor: "#045633",
-                  padding: 10,
-                  borderRadius: 25,
-                }}
-              >
-                <Text style={{ fontFamily: "Montserrat", fontWeight: "700", fontSize: 16, color: "#FFF" }}>Swap</Text>
-              </TouchableOpacity>
-            </View>
+            {/* Circular Swap Button */}
+            <TouchableOpacity
+              onPress={swapStations}
+              style={{
+                backgroundColor: "#045633",
+                padding: 15,
+                borderRadius: 50,
+                justifyContent: "center",
+                alignItems: "center",
+                marginVertical: 12,
+              }}
+            >
+              <Ionicons name="swap-vertical" size={28} color="#FFF" />
+            </TouchableOpacity>
+
+            <Text
+              style={{
+                fontFamily: "Montserrat",
+                fontWeight: "700",
+                fontSize: 20,
+                color: "#045633",
+              }}
+            >
+              To: {to}
+            </Text>
+          </View>
 
             {/* Section Title */}
             <Text
