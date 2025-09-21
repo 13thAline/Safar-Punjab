@@ -115,6 +115,7 @@ export default function RegisterHeader() {
             backgroundColor: "#FFFBF2"
           }}
           placeholder="Full Name"
+          placeholderTextColor="#757575F0"
           value={fullName}
           onChangeText={setFullName}
         />
@@ -131,6 +132,7 @@ export default function RegisterHeader() {
             backgroundColor: "#FFFBF2"
           }}
           placeholder="Mobile Number"
+          placeholderTextColor="#757575F0"
           keyboardType="phone-pad"
           value={mobile}
           onChangeText={setMobile}
@@ -148,6 +150,7 @@ export default function RegisterHeader() {
             backgroundColor: "#FFFBF2"
           }}
           placeholder="City of Operation"
+          placeholderTextColor="#757575F0"
           value={city}
           onChangeText={setCity}
         />
@@ -164,6 +167,7 @@ export default function RegisterHeader() {
             backgroundColor: "#FFFBF2"
           }}
           placeholder="Vehicle Number"
+          placeholderTextColor="#757575F0"
           value={vehicleNumber}
           onChangeText={setVehicleNumber}
         />
@@ -180,6 +184,7 @@ export default function RegisterHeader() {
             backgroundColor: "#FFFBF2"
           }}
           placeholder="Vehicle Type"
+          placeholderTextColor="#757575F0"
           value={vehicleType}
           onChangeText={setVehicleType}
         />
