@@ -1,6 +1,6 @@
 import { Text,View, Image, Dimensions, TextInput,ScrollView,TouchableOpacity } from "react-native";
-import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
+import { useRouter } from "expo-router";
 
 export default function RegisterHeader() {
   const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -9,6 +9,8 @@ export default function RegisterHeader() {
   const logoLeftCentered = SCREEN_WIDTH / 2 - LOGO_SIZE / 2;
   const CARD_WIDTH = SCREEN_WIDTH * 0.9;
   const BIG_BOX_WIDTH = SCREEN_WIDTH * 0.92;
+
+  const router = useRouter();
 
   // States for inputs
   const [fullName, setFullName] = useState("");
@@ -24,6 +26,10 @@ export default function RegisterHeader() {
     registrationCert: null,
     driverPhoto: null,
   });
+
+  const Verification = () => {
+     router.push("/driver-verification");
+  };
   
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",padding: "4%"}}>
@@ -179,109 +185,16 @@ export default function RegisterHeader() {
         />
       </View>
     </View>
-    
-    <View
-        style={{
-          width: BIG_BOX_WIDTH,
-          minHeight: 360,
-          backgroundColor: "#DFE5C6",
-          marginTop: 20,
-          borderRadius: 32,
-          paddingHorizontal: 20,
-          paddingTop: 18,
-          alignSelf: "center",
-        }}
-      >
-        <Text
-          style={{
-            fontFamily: "Montserrat",
-            fontWeight: "700",
-            fontSize: 25,
-            lineHeight: 34,
-            color: "#500B14",
-            textAlign: "center",
-            marginBottom: 5,
-          }}
-        >Document Upload
-          </Text>
-          <Text style={{ fontSize: 12, marginBottom: 10,textAlign: "center",color:"#045633" }}>
-        Your documents are safe with us and are only used for verification.
-          </Text>
-
-          <View>
-        <TextInput
-          style={{
-            borderWidth: 4,
-            borderColor: "#045633",
-            borderRadius: 35,
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            fontSize: 16,
-            marginBottom: 12,
-            paddingStart: "4%",
-            backgroundColor: "#FFFBF2"
-          }}
-          placeholder="Vehicle Permit"
-        />
-        <TextInput
-          style={{
-            borderWidth: 4,
-            borderColor: "#045633",
-            borderRadius: 35,
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            fontSize: 16,
-            marginBottom: 12,
-            paddingStart: "4%",
-            backgroundColor: "#FFFBF2"
-          }}
-          placeholder="Driving License"
-        />
-        <TextInput
-          style={{
-            borderWidth: 4,
-            borderColor: "#045633",
-            borderRadius: 35,
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            fontSize: 16,
-            marginBottom: 12,
-            paddingStart: "4%",
-            backgroundColor: "#FFFBF2"
-          }}
-          placeholder="Registraion Certificate"
-        />
-        <TextInput
-          style={{
-            borderWidth: 4,
-            borderColor: "#045633",
-            borderRadius: 35,
-            paddingHorizontal: 15,
-            paddingVertical: 10,
-            fontSize: 16,
-            marginBottom: 12,
-            paddingStart: "4%",
-            backgroundColor: "#FFFBF2"
-          }}
-          placeholder="Driver Photo"
-        />
-      </View>
-    </View>
-    {/* Terms Checkbox */}
-      <View style={{ flexDirection: "row", alignItems: "center", marginVertical: 15 }}>
-        <Text style={{ fontSize: 12, marginLeft: 8 }}>
-          I agree to the <Text style={{ color: "red" }}>Terms & Conditions</Text> and{" "}
-          <Text style={{ color: "red" }}>Privacy Policy</Text>
-        </Text>
-      </View>
 
       {/* Buttons */}
-      <View style={{ flexDirection: "row", justifyContent: "space-between" ,marginBottom:"10%" }}>
-        <TouchableOpacity style={{ borderWidth: 3, borderColor: "#757575F0", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20 }}>
-          <Text style={{ color: "#D7263D",fontWeight: 500,fontSize:15 }}>Reset</Text>
+      <View style={{ flexDirection: "row", justifyContent: "space-between" ,marginTop:"5%",padding:"1%" }}>
+        <TouchableOpacity style={{ borderWidth: 3, borderColor: "#757575F0", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"45%",alignItems:"center" }}>
+          <Text style={{ color: "#D7263D",fontWeight: 500,fontSize:20 }}>Reset</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ backgroundColor: "#045633", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20 }}>
-          <Text style={{ color: "white" }}>Submit</Text>
+        <TouchableOpacity 
+        onPress={Verification}
+        style={{ backgroundColor: "#045633", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"45%",alignItems:"center" }}>
+          <Text style={{ color: "white",fontWeight: 500,fontSize:20 }}>Next</Text>
         </TouchableOpacity>
       </View>
   </ScrollView>
