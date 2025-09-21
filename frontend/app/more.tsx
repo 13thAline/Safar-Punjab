@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, Linking, Image } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
+import Footer from "@/components/footer";
 
 export default function more({ navigation }: any) {
   const [rating, setRating] = useState(4);
@@ -20,14 +21,14 @@ export default function more({ navigation }: any) {
         flex: 1,
         backgroundColor: "#FCF5E3",
         paddingTop: "10%",
-        padding: "4%"
       }}
     >
       <View
         style={{
           flex: 1,
           backgroundColor: "#F0F6D5",
-          borderRadius: 20,
+          borderTopLeftRadius: 15,
+          borderTopRightRadius: 15,
           padding: "5%",
           elevation: 10,
           shadowColor: "#000",
@@ -154,6 +155,7 @@ export default function more({ navigation }: any) {
           </View>
         </TouchableOpacity>
       </View>
+      <Footer />
     </View>
   );
 }
