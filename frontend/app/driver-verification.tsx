@@ -66,8 +66,6 @@ export default function DriverVerificationScreen() {
     }
   };
 
-  // --- CHANGE: Use ScrollView as the main container ---
-
  return(
   <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",padding: "4%"}}>
   <View
