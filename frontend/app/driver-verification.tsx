@@ -67,13 +67,13 @@ export default function DriverVerificationScreen() {
   };
 
  return(
-  <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",padding: "4%"}}>
+  <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",paddingLeft: "4%",paddingBottom: "10%",paddingRight : "4%"}}>
   <View
     style={{
       height: 152,
       backgroundColor: "#FFB703",
       borderBottomLeftRadius: 56,
-      borderBottomRightRadius: 56,
+      borderBottomRightRadius: 56
     }}
   >
     <Image source={require("../assets/images/305905a717592dd52a6280845291b56a554a0d49.jpg")} style={{ width: LOGO_SIZE, height: LOGO_SIZE, position: "absolute", top: 20, left: logoLeftCentered, borderRadius: LOGO_RADIUS, }} /> 
@@ -111,6 +111,7 @@ export default function DriverVerificationScreen() {
 
         <View style={{
           marginTop: 20,
+          justifyContent:"center",
           alignItems: 'center', 
           width: '100%',
           backgroundColor:"#DFE5C6",
@@ -119,14 +120,15 @@ export default function DriverVerificationScreen() {
             }}>
           <Text style={{ 
             fontSize: 20, 
-            fontWeight: '500', 
-            marginBottom: 8,
-            color: "#500B14"
+            fontWeight: '500',
+            color: "#500B14",
+            marginBottom: 8
           }}
             >Bus Registration Number</Text>
           <TextInput
             style={{
               borderWidth: 2,
+              marginBottom: "3%",
               borderColor: '#045633',
               backgroundColor: '#fff',
               padding: 10,
@@ -142,7 +144,6 @@ export default function DriverVerificationScreen() {
           />
 
           <View style={{ 
-            marginTop:"4%",
             marginBottom: "4%", 
             alignItems: 'center', 
             width: '100%' 
@@ -150,10 +151,11 @@ export default function DriverVerificationScreen() {
           <Text style={{ 
             fontSize: 20, 
             fontWeight: '500', 
-            marginBottom: 10,
-            color: "#500B14"
+            marginBottom: 10, 
+            color: "#500B14",
+            textAlign: "center"
           }}>
-            Vehicle RC (Registration Certificate)</Text>
+            Vehicle Registration Certificate</Text>
           <TouchableOpacity onPress={() => pickImage(setRcPhoto)} >
             <Text style={{ 
               color: "white",
@@ -164,8 +166,7 @@ export default function DriverVerificationScreen() {
               padding: "3%"
               }}>Choose RC Photo</Text>
           </TouchableOpacity>
-          {rcPhoto && <Image source={{ uri: rcPhoto.uri }} style={{ width: 120, height: 90, marginTop: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd', resizeMode: 'cover' }} 
-          />}
+          {rcPhoto && <Image source={{ uri: rcPhoto.uri }} style={{ width: 120, height: 90, marginTop: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd', resizeMode: 'cover' }} />}
           </View>
 
           <View style={{ 
