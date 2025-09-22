@@ -73,10 +73,11 @@
 //   )
 // }
 
-import { View, Text, Image, TouchableOpacity, Dimensions } from "react-native";
+import { View, Text, Image, TouchableOpacity, Dimensions,ScrollView } from "react-native";
 import React from "react";
 import { useRouter } from "expo-router";
 import LottieView from "lottie-react-native";
+import Footer from "@/components/footer";
 
 export default function Welcome() {
   const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -88,6 +89,7 @@ export default function Welcome() {
   const BIG_BOX_WIDTH = SCREEN_WIDTH * 0.92;
 
   return (
+    <ScrollView>
     <View style={{ flex: 1, backgroundColor: "#FCF5E3" }}>
       {/* Yellow Header */}
       <View
@@ -264,6 +266,7 @@ export default function Welcome() {
           marginHorizontal: 50,
           marginTop: 30,
           alignItems: "center",
+          marginBottom:20
         }}
       >
         <Text
@@ -272,11 +275,15 @@ export default function Welcome() {
             fontWeight: "700",
             fontSize: 18,
             color: "#fff",
+        
           }}
         >
           Return To Homepage
         </Text>
       </TouchableOpacity>
+
+      <Footer></Footer>
     </View>
+    </ScrollView>
   );
 }
