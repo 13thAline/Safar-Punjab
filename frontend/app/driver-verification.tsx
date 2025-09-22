@@ -67,13 +67,13 @@ export default function DriverVerificationScreen() {
   };
 
  return(
-  <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",paddingLeft: "4%",paddingBottom: "10%",paddingRight : "4%"}}>
+  <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",paddingTop:"5%"}}>
   <View
     style={{
       height: 152,
       backgroundColor: "#FFB703",
       borderBottomLeftRadius: 56,
-      borderBottomRightRadius: 56
+      borderBottomRightRadius: 56,
     }}
   >
     <Image source={require("../assets/images/305905a717592dd52a6280845291b56a554a0d49.jpg")} style={{ width: LOGO_SIZE, height: LOGO_SIZE, position: "absolute", top: 20, left: logoLeftCentered, borderRadius: LOGO_RADIUS, }} /> 
@@ -105,18 +105,18 @@ export default function DriverVerificationScreen() {
               color: "#045633",
             }}
           >
-            Driver & Vehicle Verification
+             Verification
           </Text>
         </View>
 
         <View style={{
-          marginTop: 20,
+          margin: 20,
           justifyContent:"center",
-          alignItems: 'center', 
-          width: '100%',
+          alignItems: "center", 
+          width: '90%',
           backgroundColor:"#DFE5C6",
           borderRadius: 20,
-          padding: "5%"
+          padding: "5%",
             }}>
           <Text style={{ 
             fontSize: 20, 
@@ -163,7 +163,7 @@ export default function DriverVerificationScreen() {
               fontSize:20,
               backgroundColor:"#045633",
               borderRadius:8,
-              padding: "3%"
+              padding: "3%",
               }}>Choose RC Photo</Text>
           </TouchableOpacity>
           {rcPhoto && <Image source={{ uri: rcPhoto.uri }} style={{ width: 120, height: 90, marginTop: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd', resizeMode: 'cover' }} />}
@@ -247,12 +247,12 @@ export default function DriverVerificationScreen() {
         </View>
         {/* Buttons */}
       <View style={{ flexDirection: "row", justifyContent: "space-between" ,marginTop:"5%",padding:"1%" }}>
-        <TouchableOpacity style={{ borderWidth: 3, borderColor: "#757575F0", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"45%",alignItems:"center" }}>
+        <TouchableOpacity style={{ borderWidth: 3, borderColor: "#757575F0", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"40%",alignItems:"center",marginLeft:"5%" }}>
           <Text style={{ color: "#D7263D",fontWeight: 500,fontSize:20 }}>Reset</Text>
         </TouchableOpacity>
         <TouchableOpacity 
         onPress={handleSubmit}
-        style={{ backgroundColor: "#500B14", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"45%",alignItems:"center" }}>
+        style={{ backgroundColor: "#500B14", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"40%",alignItems:"center",marginRight:"5%" }}>
           <Text style={{ color: "white",fontWeight: 500,fontSize:20 }}>Submit</Text>
         </TouchableOpacity>
       </View>
