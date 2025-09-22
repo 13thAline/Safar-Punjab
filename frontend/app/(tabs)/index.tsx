@@ -147,7 +147,7 @@ export default function Index() {
       items={stations}
       setOpen={setFromOpen}
       setValue={setFromStation}
-      placeholder="Select To Station"
+      placeholder="Select From Station"
       listMode="MODAL"
       style={{
         borderWidth: 0,
