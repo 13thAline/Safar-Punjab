@@ -133,59 +133,59 @@ export default function Index() {
 //           Travel Anywhere
 //         </Text>
 
-//         {/* FROM Station Picker */}
-// <View style={{ zIndex: fromOpen ? 2 : 1, marginBottom: 20 }}>
-//   <View
-//     style={{
-//       flexDirection: "row",
-//       alignItems: "center",
-//       borderWidth: 3,
-//       borderColor: "#FFB703",
-//       borderRadius: 35,
-//       paddingHorizontal: 10,
-//       backgroundColor: "#fff",
-//     }}
-//   >
-//     <Image
-//       source={require("../../assets/images/busIcon.png")}
-//       style={{ width: 24, height: 24, tintColor: "#045633" }}
-//     />
-//     <DropDownPicker
-//       open={fromOpen}
-//       value={fromStation}
-//       items={stations}
-//       setOpen={setFromOpen}
-//       setValue={setFromStation}
-//       placeholder="Select To Station"
-//       listMode="MODAL"
-//       style={{
-//         borderWidth: 0,
-//         flex: 1,
-//         width: "95%",
-//         borderRadius: 30
-//       }}
-//       dropDownContainerStyle={{
-//         borderColor: "#FFB703",
-//         borderWidth: 3,
-//         borderTopWidth: 0,
-//         borderBottomLeftRadius: 20,
-//         borderBottomRightRadius: 20,
-//       }}
-//       textStyle={{
-//         fontFamily: "Montserrat",
-//         fontWeight: "600",
-//         fontSize: 16,
-//         color: "#045633",
-//       }}
-//       placeholderStyle={{
-//         fontFamily: "Montserrat",
-//         fontWeight: "600",
-//         fontSize: 16,
-//         color: "#045633",
-//       }}
-//     />
-//   </View>
-// </View>
+        {/* FROM Station Picker */}
+<View style={{ zIndex: fromOpen ? 2 : 1, marginBottom: 20 }}>
+  <View
+    style={{
+      flexDirection: "row",
+      alignItems: "center",
+      borderWidth: 3,
+      borderColor: "#FFB703",
+      borderRadius: 35,
+      paddingHorizontal: 10,
+      backgroundColor: "#fff",
+    }}
+  >
+    <Image
+      source={require("../../assets/images/busIcon.png")}
+      style={{ width: 24, height: 24, tintColor: "#045633" }}
+    />
+    <DropDownPicker
+      open={fromOpen}
+      value={fromStation}
+      items={stations}
+      setOpen={setFromOpen}
+      setValue={setFromStation}
+      placeholder="Select From Station"
+      listMode="MODAL"
+      style={{
+        borderWidth: 0,
+        flex: 1,
+        width: "95%",
+        borderRadius: 30
+      }}
+      dropDownContainerStyle={{
+        borderColor: "#FFB703",
+        borderWidth: 3,
+        borderTopWidth: 0,
+        borderBottomLeftRadius: 20,
+        borderBottomRightRadius: 20,
+      }}
+      textStyle={{
+        fontFamily: "Montserrat",
+        fontWeight: "600",
+        fontSize: 16,
+        color: "#045633",
+      }}
+      placeholderStyle={{
+        fontFamily: "Montserrat",
+        fontWeight: "600",
+        fontSize: 16,
+        color: "#045633",
+      }}
+    />
+  </View>
+</View>
 
 // {/* TO Station Picker */}
 // <View style={{ zIndex: toOpen ? 2 : 1, marginBottom: 30 }}>
