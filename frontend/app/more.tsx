@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Linking, Image } from "react-native";
+import { View, Text, TouchableOpacity, Linking } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import Footer from "@/components/footer";
+import { useRouter } from "expo-router"; // ✅ use router instead of navigation
 
-export default function more({ navigation }: any) {
+export default function More() {
   const [rating, setRating] = useState(4);
+  const router = useRouter(); 
 
   const menuItems = [
-    { label: "Change City", screen: "ChangeCity" },
-    { label: "Stops and Stations", screen: "StopsStations" },
-    { label: "Language", screen: "Language" },
-    { label: "Terms and Conditions", screen: "Terms" },
-    { label: "My Grievances", screen: "Grievances" },
-    { label: "Contact Us", screen: "Contact" },
+    { label: "Change City", screen: "/ChangeCity" },
+    { label: "Stops and Stations", screen: "/welcome" }, // ✅ connected to Welcome.tsx
+    { label: "Language", screen: "/Language" },
+    { label: "Terms and Conditions", screen: "/Terms" },
+    { label: "My Grievances", screen: "/Grievances" },
+    { label: "Contact Us", screen: "/Contact" },
   ];
 
   return (
@@ -34,14 +36,14 @@ export default function more({ navigation }: any) {
           shadowColor: "#000",
           shadowOffset: { width: 0, height: 2 },
           shadowOpacity: 0.5,
-          shadowRadius: 3.84
+          shadowRadius: 3.84,
         }}
       >
         {/* Menu Items */}
         {menuItems.map((item, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => navigation.navigate(item.screen)}
+            onPress={() => router.push(item.screen as any)} // ✅ router.push instead of navigation.navigate
             style={{
               flexDirection: "row",
               justifyContent: "space-between",
@@ -78,7 +80,7 @@ export default function more({ navigation }: any) {
               style={{
                 width: 70,
                 height: 70,
-                borderRadius: "50%",
+                borderRadius: 35,
                 borderColor: "#FFEAB4",
                 borderWidth: 3,
                 backgroundColor: "#fff",
@@ -95,7 +97,7 @@ export default function more({ navigation }: any) {
               style={{
                 width: 70,
                 height: 70,
-                borderRadius: "50%",
+                borderRadius: 35,
                 borderColor: "#FFEAB4",
                 borderWidth: 3,
                 backgroundColor: "#fff",
@@ -112,7 +114,7 @@ export default function more({ navigation }: any) {
               style={{
                 width: 70,
                 height: 70,
-                borderRadius: "50%",
+                borderRadius: 35,
                 borderColor: "#FFEAB4",
                 borderWidth: 3,
                 backgroundColor: "#fff",

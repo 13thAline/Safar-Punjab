@@ -32,7 +32,7 @@ export default function RegisterHeader() {
   };
   
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",padding: "4%"}}>
+    <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",paddingTop: "5%"}}>
     <View
       style={{
         height: 152,
@@ -193,12 +193,12 @@ export default function RegisterHeader() {
 
       {/* Buttons */}
       <View style={{ flexDirection: "row", justifyContent: "space-between" ,marginTop:"5%",padding:"1%" }}>
-        <TouchableOpacity style={{ borderWidth: 3, borderColor: "#757575F0", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"45%",alignItems:"center" }}>
+        <TouchableOpacity style={{ borderWidth: 3, borderColor: "#757575F0", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"40%",alignItems:"center",marginLeft:"5%" }}>
           <Text style={{ color: "#D7263D",fontWeight: 500,fontSize:20 }}>Reset</Text>
         </TouchableOpacity>
         <TouchableOpacity 
         onPress={Verification}
-        style={{ backgroundColor: "#045633", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"45%",alignItems:"center" }}>
+        style={{ backgroundColor: "#045633", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"40%",alignItems:"center",marginRight:"5%" }}>
           <Text style={{ color: "white",fontWeight: 500,fontSize:20 }}>Next</Text>
         </TouchableOpacity>
       </View>
