@@ -90,7 +90,7 @@ export default function Welcome() {
 
   return (
     <ScrollView>
-    <View style={{ flex: 1, backgroundColor: "#FCF5E3" }}>
+    <View style={{ flex: 1, backgroundColor: "#FCF5E3",paddingTop: "5%" }}>
       {/* Yellow Header */}
       <View
         style={{
@@ -145,7 +145,7 @@ export default function Welcome() {
       </View>
 
       {/* Animated Green Tick */}
-      <View style={{ alignItems: "center", marginTop: 10 }}>
+      <View style={{ alignItems: "center", marginTop: 5 }}>
         <LottieView
           source={require("../assets/animations/success.json")}
           autoPlay
@@ -159,10 +159,9 @@ export default function Welcome() {
         style={{
           textAlign: "center",
           fontFamily: "Montserrat",
-          fontWeight: "700",
-          fontSize: 22,
+          fontWeight: "800",
+          fontSize: 35,
           color: "#045633",
-          marginTop: 10,
         }}
       >
         Thank you!
@@ -171,9 +170,12 @@ export default function Welcome() {
         style={{
           textAlign: "center",
           fontFamily: "Montserrat",
-          fontSize: 16,
+          fontWeight: "600",
+          fontSize: 30,
           marginTop: 5,
-          color: "#333",
+          color: "#045633",
+          paddingRight: "2%",
+          paddingLeft: "2%"
         }}
       >
         Your documents have been submitted!
@@ -193,7 +195,7 @@ export default function Welcome() {
         }}
       >
         <Text style={{ fontSize: 28, marginRight: 10 }}>⭐</Text>
-        <Text style={{ flex: 1, fontSize: 16, color: "#12201A" }}>
+        <Text style={{ flex: 1, fontSize: 18, color: "#12201A" }}>
           We're reviewing your details. Verification usually takes 24–48 hours. 
           You’ll be notified via SMS once approved.
         </Text>
@@ -212,15 +214,15 @@ export default function Welcome() {
         <Text
           style={{
             fontFamily: "Montserrat",
-            fontWeight: "700",
+            fontWeight: "800",
             fontSize: 16,
             marginBottom: 5,
-            color: "#12201A",
+            color: "#045633",
           }}
         >
           Something not right?
         </Text>
-        <Text style={{ fontSize: 14, color: "#444" }}>
+        <Text style={{ fontFamily: "Poppins",fontSize: 17, color: "#500B14",fontWeight:"500" }}>
           No worries — you can quickly:
           {"\n"}• Update your details with Edit Info
           {"\n"}• Or talk to us via Contact Support
@@ -239,7 +241,7 @@ export default function Welcome() {
               alignItems: "center",
             }}
           >
-            <Text style={{ color: "#500B14" }}>Edit Information</Text>
+            <Text style={{ color: "#045633",fontWeight:"600" }}>Edit Information</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={{
@@ -251,7 +253,7 @@ export default function Welcome() {
               alignItems: "center",
             }}
           >
-            <Text style={{ color: "#D7263D" }}>Contact</Text>
+            <Text style={{ color: "#D7263D",fontWeight:"600" }}>Contact</Text>
           </TouchableOpacity>
         </View>
       </View>
