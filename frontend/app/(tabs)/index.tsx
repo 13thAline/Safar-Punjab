@@ -39,7 +39,7 @@ export default function Index() {
   };
 
   const handleRoutePress = () => {
-    console.log("Route button pressed");
+    router.push("/bus");
   };
 
   const renderContent = () => (
