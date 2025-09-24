@@ -125,11 +125,12 @@ export default function AboutUs() {
           marginTop: -180,
           zIndex:1,
           paddingTop: "42%",
-          marginBottom: "5%"
+          marginBottom: "5%",
+          padding:"2%"
         }}>
         <Text
           style={{
-            fontSize: 32,
+            fontSize: 30,
             fontWeight: "700",
             color: "#045633",
             textAlign: "center",
