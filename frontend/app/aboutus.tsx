@@ -51,7 +51,7 @@ export default function AboutUs() {
 
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",paddingTop:"5%" }}>
+    <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3"}}>
       {/* Header */}
       <View
         style={{
@@ -134,6 +134,7 @@ export default function AboutUs() {
             color: "#045633",
             textAlign: "center",
             marginBottom: 20,
+            paddingTop:10,
           }}
         >
           Connecting Drivers. Empowering Journeys...
