@@ -192,14 +192,7 @@ export default function BusInfo() {
                   <Text style={{ color: "#045633", marginBottom: 3 }}>
                      Arrival Time: {stop.time}
                   </Text>
-                  <Text style={{ color: "#8B0000", marginBottom: 3 }}>
-                     Seat Capacity: {stop.seats.filled}/{stop.seats.total}
-                  </Text>
-                  {/* Progress Bar */}
-                  <ProgressBar filled={stop.seats.filled} total={stop.seats.total} />
-                  <Text style={{ color: "#333" }}>
-                     Male: {stop.gender.male} | Female: {stop.gender.female}
-                  </Text>
+                  
                 </View>
               )}
             </View>
