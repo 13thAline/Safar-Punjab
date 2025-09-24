@@ -1,5 +1,6 @@
 import { Text, View, Image, Dimensions, ScrollView, TouchableOpacity, Linking } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
+import Footer from "@/components/footer";
 
 
 export default function AboutUs() {
@@ -10,13 +11,44 @@ export default function AboutUs() {
   const CARD_WIDTH = SCREEN_WIDTH * 0.9;
 
   const team = [
-    { name: "Soyam Patra", role: "AI/ML Engineer", github: "https://github.com/" },
-    { name: "Bibhudutta Panda", role: "Backend Developer", github: "https://github.com/" },
-    { name: "Arpita Mahapatra", role: "UI/UX Designer", github: "https://github.com/" },
-    { name: "Sailen Sahoo", role: "App Developer", github: "https://github.com/" },
-    { name: "Nipuna Mahakur", role: "Frontend Developer", github: "https://github.com/" },
-    { name: "Ashutosh Badapanda", role: "Frontend Developer", github: "https://github.com/" },
-  ];
+  { 
+    name: "Soyam Patra", 
+    role: "AI/ML Engineer", 
+    github: "https://github.com/Soyam-Patra",
+    image: require("../assets/images/soyam.jpg")
+  },
+  { 
+    name: "Bibhudutta Panda", 
+    role: "Backend Developer", 
+    github: "https://github.com/BibhuDev",
+    image: require("../assets/images/bibhu.jpg")
+  },
+  { 
+    name: "Arpita Mahapatra", 
+    role: "UI/UX Designer", 
+    github: "https://github.com/ArpitaM27",
+    image: require("../assets/images/arpita.jpg")
+  },
+  { 
+    name: "Sailen Sahoo", 
+    role: "Backend Developer", 
+    github: "https://github.com/13thAline",
+    image: require("../assets/images/sailen.jpg")
+  },
+  { 
+    name: "Nipuna Mahakur", 
+    role: "Frontend Developer", 
+    github: "https://github.com/nipuna1902",
+    image: require("../assets/images/nipuna.jpg")
+  },
+  { 
+    name: "Ashutosh Badapanda", 
+    role: "Frontend Developer", 
+    github: "https://github.com/fomo-ash",
+    image: require("../assets/images/ashutosh.jpg")
+  },
+];
+
 
   return (
     <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",paddingTop:"5%" }}>
@@ -117,9 +149,9 @@ export default function AboutUs() {
           style={{
             backgroundColor: "#FFE298",
             borderRadius: 20,
-            padding: 20,
             marginLeft:"4%",
             marginRight:"4%",
+            padding: "3%"
           }}
         >
           <Text
@@ -128,8 +160,7 @@ export default function AboutUs() {
               fontFamily: "Montserrat",
               fontWeight: "600",
               color: "#045633",
-              textAlign: "center",
-              padding: "3%"
+              textAlign: "center"
             }}
           >
             Our Mission
@@ -146,16 +177,19 @@ export default function AboutUs() {
           style={{
             width: "100%",
             height: 300,
-            resizeMode: "contain",
+            resizeMode: "contain"
           }}
         />
         </LinearGradient>
         </View>
 
         {/* Team Section */}
+        <ScrollView style={{
+          margin:"4%"
+        }}>
         <Text
           style={{
-            fontSize: 20,
+            fontSize: 28,
             fontWeight: "700",
             color: "#045633",
             marginBottom: 15,
@@ -171,28 +205,44 @@ export default function AboutUs() {
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor: "#FFFFFF",
-              borderRadius: 12,
               padding: 12,
               marginBottom: 10,
-              borderWidth: 1,
-              borderColor: "#ddd",
+              backgroundColor: "#FFF7E6",
+              borderRadius: 12,
             }}
           >
-            <View>
-              <Text style={{ fontSize: 16, fontWeight: "700", color: "#333" }}>
-                {member.name}
-              </Text>
-              <Text style={{ fontSize: 14, color: "#555" }}>{member.role}</Text>
+            {/* Left side: Profile pic + name + role */}
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Image
+                source={member.image}
+                style={{
+                  width: 50,
+                  height: 50,
+                  borderRadius: 25,
+                  marginRight: 12,
+                }}
+              />
+              <View>
+                <Text style={{ fontSize: 20, fontWeight: "500", color: "#500B14" }}>
+                  {member.name}
+                </Text>
+                <Text style={{ fontSize: 15, color: "#757575" }}>
+                  {member.role}
+                </Text>
+              </View>
             </View>
+
+            {/* Right side: GitHub icon */}
             <TouchableOpacity onPress={() => Linking.openURL(member.github)}>
               <Image
-                // source={require("../assets/images/nipuna.jpg")} // your github icon
+                source={require("../assets/images/Github.png")}
                 style={{ width: 28, height: 28 }}
               />
             </TouchableOpacity>
           </View>
         ))}
+      <Footer/>
+      </ScrollView>
       </View>
     </ScrollView>
   );
