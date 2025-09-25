@@ -12,7 +12,6 @@ export default function BusList() {
   const logoLeftCentered = SCREEN_WIDTH / 2 - LOGO_SIZE / 2;
   const CARD_WIDTH = SCREEN_WIDTH * 0.9;
 
-  // Example bus list (later fetch from backend/DB)
   const buses = [
     { number: "14", type: "Non-AC", route: "Amritsar ISBT → Khasa Bus Stand" },
     { number: "21", type: "AC", route: "Railway Station → Batala Road" },
@@ -22,116 +21,127 @@ export default function BusList() {
   ];
 
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3" }}>
-      {/* Header */}
-      <View
-        style={{
-          height: 152,
-          backgroundColor: "#FFB703",
-          borderBottomLeftRadius: 56,
-          borderBottomRightRadius: 56,
-        }}
-      >
-        <Image
-          source={require("../assets/images/305905a717592dd52a6280845291b56a554a0d49.jpg")}
+    <View style={{ flex: 1, backgroundColor: "#FCF5E3" }}>
+      {/* Scrollable Content */}
+      <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+        {/* Header */}
+        <View
           style={{
-            width: LOGO_SIZE,
-            height: LOGO_SIZE,
-            position: "absolute",
-            top: 20,
-            left: logoLeftCentered,
-            borderRadius: LOGO_RADIUS,
-          }}
-        />
-      </View>
-
-      {/* White Card */}
-      <View
-        style={{
-          height: 60,
-          width: CARD_WIDTH,
-          marginTop: -30,
-          borderRadius: 40,
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#FFFFFF",
-          shadowColor: "#000",
-          shadowOpacity: 0.1,
-          shadowRadius: 6,
-          shadowOffset: { width: 0, height: 2 },
-          alignSelf: "center",
-          elevation: 15,
-        }}
-      >
-        <Text
-          style={{
-            fontFamily: "Montserrat",
-            fontWeight: "700",
-            fontSize: 28,
-            lineHeight: 28,
-            color: "#045633",
+            height: 152,
+            backgroundColor: "#FFB703",
+            borderBottomLeftRadius: 56,
+            borderBottomRightRadius: 56,
           }}
         >
-          Welcome Saathi
-        </Text>
-      </View>
-
-      {/* Bus List */}
-      <View style={{ marginTop: 20, alignItems: "center" }}>
-        {buses.map((bus, index) => (
-          <TouchableOpacity
-            key={index}
+          <Image
+            source={require("../assets/images/305905a717592dd52a6280845291b56a554a0d49.jpg")}
             style={{
-              width: CARD_WIDTH,
-              backgroundColor: "#fff",
-              borderRadius: 15,
-              padding: 20,
-              marginBottom: 15,
-              shadowColor: "#000",
-              shadowOpacity: 0.1,
-              shadowRadius: 6,
-              shadowOffset: { width: 0, height: 2 },
-              elevation: 4,
+              width: LOGO_SIZE,
+              height: LOGO_SIZE,
+              position: "absolute",
+              top: 20,
+              left: logoLeftCentered,
+              borderRadius: LOGO_RADIUS,
             }}
-            onPress={() => router.push("/BusNo")}
-          >
-            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
-              {/* Bus Number */}
-              <Text
-                style={{
-                  fontSize: 20,
-                  fontWeight: "bold",
-                  color: "#045633",
-                }}
-              >
-                Bus {bus.number}
-              </Text>
+          />
+        </View>
 
-              {/* Bus Type Badge */}
+        {/* White Card */}
+        <View
+          style={{
+            height: 60,
+            width: CARD_WIDTH,
+            marginTop: -30,
+            borderRadius: 40,
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#FFFFFF",
+            shadowColor: "#000",
+            shadowOpacity: 0.1,
+            shadowRadius: 6,
+            shadowOffset: { width: 0, height: 2 },
+            alignSelf: "center",
+            elevation: 15,
+          }}
+        >
+          <Text
+            style={{
+              fontFamily: "Montserrat",
+              fontWeight: "700",
+              fontSize: 28,
+              lineHeight: 28,
+              color: "#045633",
+            }}
+          >
+            Buses
+          </Text>
+        </View>
+
+        {/* Bus List */}
+        <View style={{ marginTop: 20, alignItems: "center" }}>
+          {buses.map((bus, index) => (
+            <TouchableOpacity
+              key={index}
+              style={{
+                width: CARD_WIDTH,
+                backgroundColor: "#fff",
+                borderRadius: 15,
+                padding: 20,
+                marginBottom: 15,
+                shadowColor: "#000",
+                shadowOpacity: 0.1,
+                shadowRadius: 6,
+                shadowOffset: { width: 0, height: 2 },
+                elevation: 4,
+              }}
+              onPress={() => router.push("/bus")}
+            >
               <View
                 style={{
-                  backgroundColor: "#FFB703",
-                  borderRadius: 12,
-                  paddingVertical: 4,
-                  paddingHorizontal: 10,
+                  flexDirection: "row",
+                  justifyContent: "space-between",
+                  alignItems: "center",
                 }}
               >
-                <Text style={{ fontSize: 12, fontWeight: "600", color: "#fff" }}>
-                  {bus.type}
+                {/* Bus Number */}
+                <Text
+                  style={{
+                    fontSize: 20,
+                    fontWeight: "bold",
+                    color: "#045633",
+                  }}
+                >
+                  Bus {bus.number}
                 </Text>
+
+                {/* Bus Type Badge */}
+                <View
+                  style={{
+                    backgroundColor: "#FFB703",
+                    borderRadius: 12,
+                    paddingVertical: 4,
+                    paddingHorizontal: 10,
+                  }}
+                >
+                  <Text style={{ fontSize: 12, fontWeight: "600", color: "#fff" }}>
+                    {bus.type}
+                  </Text>
+                </View>
               </View>
-            </View>
 
-            {/* Route Info */}
-            <Text style={{ fontSize: 14, color: "#555", marginTop: 5 }}>
-              {bus.route}
-            </Text>
-          </TouchableOpacity>
-        ))}
+              {/* Route Info */}
+              <Text style={{ fontSize: 14, color: "#555", marginTop: 5 }}>
+                {bus.route}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+      </ScrollView>
 
-        
+      {/* Fixed Footer */}
+      <View style={{ position: "absolute", bottom: 0, left: 0, right: 0 }}>
+        <Footer />
       </View>
-      <Footer></Footer>
-    </ScrollView>
+    </View>
   );
 }
