@@ -32,7 +32,7 @@ export default function RegisterHeader() {
   };
   
   return (
-    <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",paddingTop: "5%"}}>
+    <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3"}}>
     <View
       style={{
         height: 152,

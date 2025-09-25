@@ -67,7 +67,7 @@ export default function DriverVerificationScreen() {
   };
 
  return(
-  <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3",paddingTop:"5%"}}>
+  <ScrollView style={{ flex: 1, backgroundColor: "#FCF5E3"}}>
   <View
     style={{
       height: 152,
@@ -110,7 +110,8 @@ export default function DriverVerificationScreen() {
         </View>
 
         <View style={{
-          margin: 20,
+          marginTop: 20,
+          marginLeft: 20,
           justifyContent:"center",
           alignItems: "center", 
           width: '90%',
@@ -137,7 +138,7 @@ export default function DriverVerificationScreen() {
               textAlign: 'center',
               fontSize: 16,
           }}
-            placeholder="e.g., OD02AB1234"
+            placeholder="e.g., PB02AB1234"
           placeholderTextColor="#757575F0"
             value={regNumber}
             onChangeText={setRegNumber}
@@ -164,6 +165,8 @@ export default function DriverVerificationScreen() {
               backgroundColor:"#045633",
               borderRadius:8,
               padding: "3%",
+              width:CARD_WIDTH*0.8,
+              textAlign: "center"
               }}>Choose RC Photo</Text>
           </TouchableOpacity>
           {rcPhoto && <Image source={{ uri: rcPhoto.uri }} style={{ width: 120, height: 90, marginTop: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd', resizeMode: 'cover' }} />}
@@ -188,7 +191,9 @@ export default function DriverVerificationScreen() {
               fontSize:20,
               backgroundColor:"#045633",
               borderRadius:8,
-              padding: "3%"
+              padding: "3%",
+              width:CARD_WIDTH*0.8,
+              textAlign: "center"
               }}>Choose ID Photo</Text>
           </TouchableOpacity>
           {idPhoto && <Image source={{ uri: idPhoto.uri }} style={{ width: 120, height: 90, marginTop: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd', resizeMode: 'cover' }} />}
@@ -213,7 +218,9 @@ export default function DriverVerificationScreen() {
               fontSize:20,
               backgroundColor:"#045633",
               borderRadius:8,
-              padding: "3%"
+              padding: "3%",
+              width:CARD_WIDTH*0.8,
+              textAlign: "center"
               }}>Choose License Photo</Text>
           </TouchableOpacity>
           {licensePhoto && <Image source={{ uri: licensePhoto.uri }} style={{ width: 120, height: 90, marginTop: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd', resizeMode: 'cover' }}/>}
@@ -238,7 +245,9 @@ export default function DriverVerificationScreen() {
               fontSize:20,
               backgroundColor:"#045633",
               borderRadius:8,
-              padding: "3%"
+              padding: "3%",
+              width:CARD_WIDTH*0.8,
+              textAlign: "center"
               }}>Choose Selfie</Text>
           </TouchableOpacity>
            {selfie && <Image source={{ uri: selfie.uri }} style={{ width: 120, height: 90, marginTop: 16, borderRadius: 8, borderWidth: 1, borderColor: '#ddd', resizeMode: 'cover' }}/>}
@@ -247,12 +256,12 @@ export default function DriverVerificationScreen() {
         </View>
         {/* Buttons */}
       <View style={{ flexDirection: "row", justifyContent: "space-between" ,marginTop:"5%",padding:"1%" }}>
-        <TouchableOpacity style={{ borderWidth: 3, borderColor: "#757575F0", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"40%",alignItems:"center",marginLeft:"5%" }}>
-          <Text style={{ color: "#D7263D",fontWeight: 500,fontSize:20 }}>Reset</Text>
+        <TouchableOpacity style={{ borderWidth: 3, borderColor: "#757575F0", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"40%",alignItems:"center",marginLeft:"5%", marginBottom:"80" }}>
+          <Text style={{ color: "#D7263D",fontWeight: 500,fontSize:20, }}>Reset</Text>
         </TouchableOpacity>
         <TouchableOpacity 
         onPress={handleSubmit}
-        style={{ backgroundColor: "#500B14", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"40%",alignItems:"center",marginRight:"5%" }}>
+        style={{ backgroundColor: "#500B14", paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20,width:"40%",alignItems:"center",marginRight:"5%", marginBottom:"80" }}>
           <Text style={{ color: "white",fontWeight: 500,fontSize:20 }}>Submit</Text>
         </TouchableOpacity>
       </View>

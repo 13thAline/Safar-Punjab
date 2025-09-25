@@ -25,21 +25,27 @@ export default function Index() {
   const [toStation, setToStation] = useState(null);
 
   const handleSearch = () => {
-     router.push(
-    `/search?from=${encodeURIComponent(fromStation || "")}&to=${encodeURIComponent(toStation || "")}`
-  );
+    router.push(
+      `/search?from=${encodeURIComponent(fromStation || "")}&to=${encodeURIComponent(toStation || "")}`
+    );
   };
 
   const handleRegisters = () => {
-     router.push("/register");
+    router.push("/register");
   };
+
+  // ============ NEW LOGIN HANDLER ============
+  const handleLogin = () => {
+    router.push("/login");
+  };
+  // ===========================================
 
   const handleBusNoPress = () => {
     console.log("Bus No button pressed");
   };
 
   const handleRoutePress = () => {
-    console.log("Route button pressed");
+    router.push("/bus");
   };
 
   const renderContent = () => (
@@ -125,112 +131,112 @@ export default function Index() {
         </Text>
 
         {/* FROM Station Picker */}
-<View style={{ zIndex: fromOpen ? 2 : 1, marginBottom: 20 }}>
-  <View
-    style={{
-      flexDirection: "row",
-      alignItems: "center",
-      borderWidth: 3,
-      borderColor: "#FFB703",
-      borderRadius: 35,
-      paddingHorizontal: 10,
-      backgroundColor: "#fff",
-    }}
-  >
-    <Image
-      source={require("../../assets/images/busIcon.png")}
-      style={{ width: 24, height: 24, tintColor: "#045633" }}
-    />
-    <DropDownPicker
-      open={fromOpen}
-      value={fromStation}
-      items={stations}
-      setOpen={setFromOpen}
-      setValue={setFromStation}
-      placeholder="Select From Station"
-      listMode="MODAL"
-      style={{
-        borderWidth: 0,
-        flex: 1,
-        width: "95%",
-        borderRadius: 30
-      }}
-      dropDownContainerStyle={{
-        borderColor: "#FFB703",
-        borderWidth: 3,
-        borderTopWidth: 0,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-      }}
-      textStyle={{
-        fontFamily: "Montserrat",
-        fontWeight: "600",
-        fontSize: 16,
-        color: "#045633",
-      }}
-      placeholderStyle={{
-        fontFamily: "Montserrat",
-        fontWeight: "600",
-        fontSize: 16,
-        color: "#045633",
-      }}
-    />
-  </View>
-</View>
+        <View style={{ zIndex: fromOpen ? 2 : 1, marginBottom: 20 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              borderWidth: 3,
+              borderColor: "#FFB703",
+              borderRadius: 35,
+              paddingHorizontal: 10,
+              backgroundColor: "#fff",
+            }}
+          >
+            <Image
+              source={require("../../assets/images/busIcon.png")}
+              style={{ width: 24, height: 24, tintColor: "#045633" }}
+            />
+            <DropDownPicker
+              open={fromOpen}
+              value={fromStation}
+              items={stations}
+              setOpen={setFromOpen}
+              setValue={setFromStation}
+              placeholder="Select From Station"
+              listMode="MODAL"
+              style={{
+                borderWidth: 0,
+                flex: 1,
+                width: "95%",
+                borderRadius: 30
+              }}
+              dropDownContainerStyle={{
+                borderColor: "#FFB703",
+                borderWidth: 3,
+                borderTopWidth: 0,
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+              }}
+              textStyle={{
+                fontFamily: "Montserrat",
+                fontWeight: "600",
+                fontSize: 16,
+                color: "#045633",
+              }}
+              placeholderStyle={{
+                fontFamily: "Montserrat",
+                fontWeight: "600",
+                fontSize: 16,
+                color: "#045633",
+              }}
+            />
+          </View>
+        </View>
 
-{/* TO Station Picker */}
-<View style={{ zIndex: toOpen ? 2 : 1, marginBottom: 30 }}>
-  <View
-    style={{
-      flexDirection: "row",
-      alignItems: "center",
-      borderWidth: 3,
-      borderColor: "#FFB703",
-      borderRadius: 35,
-      paddingHorizontal: 10,
-      backgroundColor: "#fff",
-    }}
-  >
-    <Image
-      source={require("../../assets/images/busIcon.png")} 
-      style={{ width: 24, height: 24,tintColor: "#045633" }}
-    />
-    <DropDownPicker
-      open={toOpen}
-      value={toStation}
-      items={stations}
-      setOpen={setToOpen}
-      setValue={setToStation}
-      placeholder="Select To Station"
-      listMode="MODAL"
-      style={{
-        borderWidth: 0,
-        flex: 1,
-        width: "95%",
-        borderRadius: 30
-      }}
-      dropDownContainerStyle={{
-        borderColor: "#FFB703",
-        borderWidth: 3,
-        borderTopWidth: 0,
-        borderBottomLeftRadius: 20,
-        borderBottomRightRadius: 20,
-      }}
-      textStyle={{
-        fontFamily: "Montserrat",
-        fontWeight: "600",
-        fontSize: 16,
-        color: "#045633",
-      }}
-      placeholderStyle={{
-        fontFamily: "Montserrat",
-        fontWeight: "600",
-        fontSize: 16,
-        color: "#045633",
-      }}
-    />
-  </View>
-</View>
+        {/* TO Station Picker */}
+        <View style={{ zIndex: toOpen ? 2 : 1, marginBottom: 30 }}>
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              borderWidth: 3,
+              borderColor: "#FFB703",
+              borderRadius: 35,
+              paddingHorizontal: 10,
+              backgroundColor: "#fff",
+            }}
+          >
+            <Image
+              source={require("../../assets/images/busIcon.png")}
+              style={{ width: 24, height: 24, tintColor: "#045633" }}
+            />
+            <DropDownPicker
+              open={toOpen}
+              value={toStation}
+              items={stations}
+              setOpen={setToOpen}
+              setValue={setToStation}
+              placeholder="Select To Station"
+              listMode="MODAL"
+              style={{
+                borderWidth: 0,
+                flex: 1,
+                width: "95%",
+                borderRadius: 30
+              }}
+              dropDownContainerStyle={{
+                borderColor: "#FFB703",
+                borderWidth: 3,
+                borderTopWidth: 0,
+                borderBottomLeftRadius: 20,
+                borderBottomRightRadius: 20,
+              }}
+              textStyle={{
+                fontFamily: "Montserrat",
+                fontWeight: "600",
+                fontSize: 16,
+                color: "#045633",
+              }}
+              placeholderStyle={{
+                fontFamily: "Montserrat",
+                fontWeight: "600",
+                fontSize: 16,
+                color: "#045633",
+              }}
+            />
+          </View>
+        </View>
 
 
         {/* Search Button */}
@@ -339,7 +345,7 @@ export default function Index() {
           borderRadius: 32,
           paddingHorizontal: 20,
           paddingTop: 18,
-          paddingBottom:20,
+          paddingBottom: 20,
           alignSelf: "center",
         }}
       >
@@ -391,14 +397,45 @@ export default function Index() {
           in your direction to fill empty seats and boost your earnings.
         </Text>
 
-        {/* REGISTER BUTTON (Right aligned with fixed height) */}
-        <View style={{ alignItems: "flex-end", marginTop: 50 }}>
+        {/* ============ MODIFIED THIS SECTION ============ */}
+        <View style={{ flexDirection: "row", justifyContent: "flex-end", marginTop: 50, gap: 10 }}>
+          {/* LOGIN BUTTON */}
+          <TouchableOpacity
+            onPress={handleLogin}
+            style={{
+              backgroundColor: "#FFB703", // Yellow color for distinction
+              paddingVertical: 12,
+              paddingHorizontal: 25, // Added padding for better size
+              height: 50,
+              borderRadius: 35,
+              alignItems: "center",
+              justifyContent: "center",
+              shadowColor: "#000",
+              shadowOffset: { width: 0, height: 2 },
+              shadowOpacity: 0.15,
+              shadowRadius: 5,
+              elevation: 3,
+            }}
+          >
+            <Text
+              style={{
+                fontFamily: "Montserrat",
+                fontWeight: "700",
+                fontSize: 18,
+                color: "#045633", // Dark green text
+              }}
+            >
+              Login
+            </Text>
+          </TouchableOpacity>
+
+          {/* REGISTER BUTTON */}
           <TouchableOpacity
             onPress={handleRegisters}
             style={{
               backgroundColor: "#045633",
               paddingVertical: 12,
-              width: LOGO_SIZE + 90,
+              paddingHorizontal: 25, // Added padding for better size
               height: 50,
               borderRadius: 35,
               alignItems: "center",
@@ -422,6 +459,7 @@ export default function Index() {
             </Text>
           </TouchableOpacity>
         </View>
+        {/* ============================================== */}
       </View>
     </View>
   );

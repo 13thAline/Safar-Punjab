@@ -14,7 +14,7 @@ export default function Footer() {
     },
     {
       label: "About Us",
-      path: "/about",
+      path: "/aboutus",
       icon: (color: string) => <MaterialIcons name="people" size={28} color={color} />,
     },
     {
