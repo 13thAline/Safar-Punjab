@@ -3,6 +3,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 import { stations } from "@/data/station";
 import { useRouter } from "expo-router";
+import { router } from "expo-router";
 
 
 export default function Index() {
@@ -41,8 +42,8 @@ export default function Index() {
   // ===========================================
 
   const handleBusNoPress = () => {
-    console.log("Bus No button pressed");
-  };
+  router.push("/busno");   // navigates to app/busnos.tsx
+};
 
   const handleRoutePress = () => {
     router.push("/bus");
