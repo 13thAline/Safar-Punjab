@@ -31,10 +31,29 @@ export default function Login() {
   // ===============================================
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Driver Login</Text>
+    <View style={{
+        flex: 1,
+        justifyContent: 'center',
+        padding: 20,
+        backgroundColor: '#F5F5F5',
+      }}>
+      <Text style={{
+        fontSize: 28,
+        fontWeight: 'bold',
+        marginBottom: 24,
+        textAlign: 'center',
+        color: '#333',
+      }}>Driver Login</Text>
       <TextInput
-        style={styles.input}
+        style={{
+        height: 50,
+        borderColor: '#007AFF',
+        borderWidth: 1,
+        borderRadius: 8,
+        marginBottom: 15,
+        paddingHorizontal: 15,
+        backgroundColor: '#FFFFFF',
+      }}
         placeholder="Email"
         value={email}
         onChangeText={setEmail}
@@ -42,51 +61,32 @@ export default function Login() {
         autoCapitalize="none"
       />
       <TextInput
-        style={styles.input}
+        style={{
+        height: 50,
+        borderColor: '#007AFF',
+        borderWidth: 1,
+        borderRadius: 8,
+        marginBottom: 15,
+        paddingHorizontal: 15,
+        backgroundColor: '#FFFFFF',
+      }}
         placeholder="Password"
         value={password}
         onChangeText={setPassword}
         secureTextEntry
       />
-      <Pressable style={styles.button} onPress={handleLogin}>
-        <Text style={styles.buttonText}>Login</Text>
+      <Pressable style={{
+        backgroundColor: '#007AFF',
+        paddingVertical: 15,
+        borderRadius: 8,
+        alignItems: 'center',
+      }} onPress={handleLogin}>
+        <Text style={{
+        color: '#FFFFFF',
+        fontSize: 16,
+        fontWeight: 'bold',
+      }}>Login</Text>
       </Pressable>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    padding: 20,
-    backgroundColor: '#F5F5F5',
-  },
-  title: {
-    fontSize: 28,
-    fontWeight: 'bold',
-    marginBottom: 24,
-    textAlign: 'center',
-    color: '#333',
-  },
-  input: {
-    height: 50,
-    borderColor: '#007AFF',
-    borderWidth: 1,
-    borderRadius: 8,
-    marginBottom: 15,
-    paddingHorizontal: 15,
-    backgroundColor: '#FFFFFF',
-  },
-  button: {
-    backgroundColor: '#007AFF',
-    paddingVertical: 15,
-    borderRadius: 8,
-    alignItems: 'center',
-  },
-  buttonText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
