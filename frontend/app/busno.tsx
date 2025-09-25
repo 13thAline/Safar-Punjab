@@ -1,6 +1,7 @@
 import { View, Text, ScrollView, TouchableOpacity, Dimensions, Image } from "react-native";
 import { useRouter } from "expo-router";
 import React from "react";
+import Footer from "@/components/footer";
 
 export default function BusList() {
   const SCREEN_WIDTH = Dimensions.get("window").width;
@@ -127,7 +128,10 @@ export default function BusList() {
             </Text>
           </TouchableOpacity>
         ))}
+
+        
       </View>
+      <Footer></Footer>
     </ScrollView>
   );
 }
