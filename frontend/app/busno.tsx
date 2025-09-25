@@ -93,7 +93,7 @@ export default function BusList() {
               shadowOffset: { width: 0, height: 2 },
               elevation: 4,
             }}
-            onPress={() => router.push("/BusNo")}
+            onPress={() => router.push("/busno")}
           >
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
               {/* Bus Number */}
