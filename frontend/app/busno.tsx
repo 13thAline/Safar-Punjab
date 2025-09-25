@@ -77,42 +77,36 @@ export default function BusList() {
           </Text>
         </View>
 
-        {/* Bus List */}
-        <View style={{ marginTop: 20, alignItems: "center" }}>
-          {buses.map((bus, index) => (
-            <TouchableOpacity
-              key={index}
-              style={{
-                width: CARD_WIDTH,
-                backgroundColor: "#fff",
-                borderRadius: 15,
-                padding: 20,
-                marginBottom: 15,
-                shadowColor: "#000",
-                shadowOpacity: 0.1,
-                shadowRadius: 6,
-                shadowOffset: { width: 0, height: 2 },
-                elevation: 4,
-              }}
-              onPress={() => router.push("/bus")}
-            >
-              <View
+      {/* Bus List */}
+      <View style={{ marginTop: 20, alignItems: "center" }}>
+        {buses.map((bus, index) => (
+          <TouchableOpacity
+            key={index}
+            style={{
+              width: CARD_WIDTH,
+              backgroundColor: "#fff",
+              borderRadius: 15,
+              padding: 20,
+              marginBottom: 15,
+              shadowColor: "#000",
+              shadowOpacity: 0.1,
+              shadowRadius: 6,
+              shadowOffset: { width: 0, height: 2 },
+              elevation: 4,
+            }}
+            onPress={() => router.push("/BusNo")}
+          >
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center" }}>
+              {/* Bus Number */}
+              <Text
                 style={{
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                  alignItems: "center",
+                  fontSize: 20,
+                  fontWeight: "bold",
+                  color: "#045633",
                 }}
               >
-                {/* Bus Number */}
-                <Text
-                  style={{
-                    fontSize: 20,
-                    fontWeight: "bold",
-                    color: "#045633",
-                  }}
-                >
-                  Bus {bus.number}
-                </Text>
+                Bus {bus.number}
+              </Text>
 
                 {/* Bus Type Badge */}
                 <View
