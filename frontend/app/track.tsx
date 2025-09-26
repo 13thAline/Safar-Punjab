@@ -1,7 +1,6 @@
-// frontend/app/track.tsx
 import React, { useState, useEffect, useRef } from 'react';
-import { StyleSheet, View, Text, Alert } from 'react-native';
-import MapView, { Marker } from 'react-native-maps';
+import { StyleSheet, View, Text } from 'react-native';
+import MapView, { Marker, Polyline } from 'react-native-maps';
 import { Stack, useLocalSearchParams } from 'expo-router';
 
 const API_URL = process.env.EXPO_PUBLIC_API_URL || '';
@@ -74,7 +73,7 @@ export default function TrackScreen() {
             <Text style={styles.statusText}>Status: {connectionStatus}</Text>
         </View>
       </View>
-    </>
+    </View>
   );
 }
 

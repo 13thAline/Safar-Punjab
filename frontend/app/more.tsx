@@ -1,163 +1,139 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, Linking } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  Linking,
+  StyleSheet,
+} from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import Footer from "@/components/footer";
-import { useRouter } from "expo-router"; // ✅ use router instead of navigation
+import { useRouter } from "expo-router";
 
 export default function More() {
-  const [rating, setRating] = useState(4);
-  const router = useRouter(); 
+  const [rating, setRating] = useState(0);
+  const router = useRouter();
 
   const menuItems = [
-    { label: "Change City", screen: "/ChangeCity" },
-    { label: "Stops and Stations", screen: "/welcome" }, // ✅ connected to Welcome.tsx
-    { label: "Language", screen: "/Language" },
-    { label: "Terms and Conditions", screen: "/Terms" },
-    { label: "My Grievances", screen: "/Grievances" },
-    { label: "Contact Us", screen: "/Contact" },
+    { label: "Change City", screen: "/changecity", active: true },
+    { label: "Stops and Stations", screen: "/welcome", active: true }, // ❌ Inactive
+    { label: "Language", screen: "/language", active: true },
+    { label: "Terms and Conditions", screen: "/terms", active: true },
+    { label: "My Grievances", screen: "/grievances", active: true },
+    { label: "Contact Us", screen: "/contact", active: true },
   ];
 
   return (
-    <View
-      style={{
-        flex: 1,
-        backgroundColor: "#FCF5E3",
-        paddingTop: "10%",
-      }}
-    >
-      <View
-        style={{
-          flex: 1,
-          backgroundColor: "#F0F6D5",
-          borderTopLeftRadius: 15,
-          borderTopRightRadius: 15,
-          padding: "5%",
-          elevation: 10,
-          shadowColor: "#000",
-          shadowOffset: { width: 0, height: 2 },
-          shadowOpacity: 0.5,
-          shadowRadius: 3.84,
-        }}
-      >
-        {/* Menu Items */}
+    <View style={styles.container}>
+      <View style={styles.innerContainer}>
         {menuItems.map((item, index) => (
           <TouchableOpacity
             key={index}
-            onPress={() => router.push(item.screen as any)} // ✅ router.push instead of navigation.navigate
-            style={{
-              flexDirection: "row",
-              justifyContent: "space-between",
-              alignItems: "center",
-              borderWidth: 5,
-              borderColor: "#FFEAB4",
-              borderRadius: 30,
-              padding: 12,
-              marginBottom: 12,
-              backgroundColor: "#FFFBF2",
-            }}
+            disabled={!item.active}
+            onPress={() => item.active && router.push(item.screen as any)}
+            style={[
+              styles.menuItem,
+              {
+                borderColor: item.active ? "#FFEAB4" : "#ddd",
+                backgroundColor: item.active ? "#FFFBF2" : "#f2f2f2",
+                opacity: item.active ? 1 : 0.6,
+              },
+            ]}
           >
-            <Text style={{ fontSize: 20, fontWeight: "400", color: "#EEAC09" }}>
+            <Text
+              style={{
+                fontSize: 20,
+                color: item.active ? "#EEAC09" : "#888",
+              }}
+            >
               {item.label}
             </Text>
-            <Ionicons name="chevron-forward" size={20} color="#666" />
+            <Ionicons
+              name="chevron-forward"
+              size={20}
+              color={item.active ? "#666" : "#aaa"}
+            />
           </TouchableOpacity>
         ))}
 
-        {/* Social Section */}
-        <Text
-          style={{
-            fontSize: 25,
-            fontWeight: "bold",
-            marginTop: 10,
-            marginBottom: 10,
-          }}
-        >
-          Follow us on
-        </Text>
-        <View style={{ flexDirection: "row", gap: 15 }}>
-          <TouchableOpacity onPress={() => Linking.openURL("https://twitter.com")}>
-            <View
-              style={{
-                width: 70,
-                height: 70,
-                borderRadius: 35,
-                borderColor: "#FFEAB4",
-                borderWidth: 3,
-                backgroundColor: "#fff",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <FontAwesome name="twitter" size={45} color="#555" />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => Linking.openURL("https://facebook.com")}>
-            <View
-              style={{
-                width: 70,
-                height: 70,
-                borderRadius: 35,
-                borderColor: "#FFEAB4",
-                borderWidth: 3,
-                backgroundColor: "#fff",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <FontAwesome name="facebook" size={45} color="#555" />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity onPress={() => Linking.openURL("https://instagram.com")}>
-            <View
-              style={{
-                width: 70,
-                height: 70,
-                borderRadius: 35,
-                borderColor: "#FFEAB4",
-                borderWidth: 3,
-                backgroundColor: "#fff",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <FontAwesome name="instagram" size={45} color="#555" />
-            </View>
-          </TouchableOpacity>
+        <Text style={styles.sectionTitle}>Follow us on</Text>
+        <View style={styles.socialRow}>
+          {[
+            { icon: "twitter", url: "https://twitter.com" },
+            { icon: "facebook", url: "https://facebook.com" },
+            { icon: "instagram", url: "https://instagram.com" },
+          ].map((s, i) => (
+            <TouchableOpacity key={i} onPress={() => Linking.openURL(s.url)}>
+              <View style={styles.socialBtn}>
+                <FontAwesome name={s.icon as any} size={40} color="#555" />
+              </View>
+            </TouchableOpacity>
+          ))}
         </View>
 
-        {/* Rating Section */}
-        <TouchableOpacity
-          style={{
-            flexDirection: "row",
-            alignItems: "center",
-            justifyContent: "space-between",
-            borderWidth: 3,
-            borderColor: "#FFD966",
-            borderRadius: 20,
-            padding: 12,
-            marginTop: 20,
-            backgroundColor: "#FFFBF2",
-          }}
-          onPress={() => alert("Redirect to App Store")}
-        >
-          <Text style={{ fontSize: 20, color: "#E7A600" }}>
-            Rate us on App Store
-          </Text>
-          <View style={{ flexDirection: "row" }}>
-            {[1, 2, 3, 4, 5].map((i) => (
+        <Text style={styles.sectionTitle}>Rate us</Text>
+        <View style={styles.ratingRow}>
+          {[1, 2, 3, 4, 5].map((i) => (
+            <TouchableOpacity key={i} onPress={() => setRating(i)}>
               <FontAwesome
-                key={i}
                 name={i <= rating ? "star" : "star-o"}
-                size={20}
+                size={28}
                 color="#E7A600"
+                style={{ marginRight: 5 }}
               />
-            ))}
-          </View>
-        </TouchableOpacity>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
       <Footer />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#FCF5E3",
+    paddingTop: "10%",
+  },
+  innerContainer: {
+    flex: 1,
+    backgroundColor: "#F0F6D5",
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+    padding: "5%",
+    elevation: 10,
+  },
+  menuItem: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderWidth: 4,
+    borderRadius: 25,
+    padding: 14,
+    marginBottom: 14,
+  },
+  sectionTitle: {
+    fontSize: 22,
+    fontWeight: "600",
+    marginVertical: 10,
+  },
+  socialRow: {
+    flexDirection: "row",
+    gap: 15,
+  },
+  socialBtn: {
+    width: 65,
+    height: 65,
+    borderRadius: 35,
+    borderWidth: 2,
+    borderColor: "#FFD966",
+    backgroundColor: "#fff",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  ratingRow: {
+    flexDirection: "row",
+    marginTop: 8,
+  },
+});
