@@ -1,4 +1,4 @@
-import { View, Image, Dimensions, Text, FlatList, TouchableOpacity } from "react-native";
+import { View, Image, Dimensions, Text, FlatList, TouchableOpacity, StyleSheet } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import { useState } from "react";
 import { stations } from "@/data/station";

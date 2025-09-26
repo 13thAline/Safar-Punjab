@@ -73,7 +73,7 @@ export default function TrackScreen() {
             <Text style={styles.statusText}>Status: {connectionStatus}</Text>
         </View>
       </View>
-    </View>
+    </>
   );
 }
 
